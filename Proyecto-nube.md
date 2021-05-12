@@ -1,13 +1,13 @@
 # Desarrollo de Aplicaciones en la Nube 
 ## Documento de Arquitectura del Software
-### MarketApp
+### Nombre: MarketApp
 
 ## Autores:
 - **Miguel Chay Nah**
 - **Efrain Aké Ojeda**
 - **Jessica Sarai González Bautista**
 - **Karina Carmona Vargas**
-- 
+
 # Introducción
 # **Propósito:**
 Actualmente, existen muchos negocios locales que no tienen la facilidad de promocionar sus productos o no cuentan con un poder adquisitivo suficiente para añadirse a      plataformas en los cuales les ayuden a distribuir su producto. El propósito de esta aplicación es ayudar a los negocios locales a promocionar y expandir su negocio, en su pueblo o ciudad, de forma que su clientela aumente, también que brinden un servicio eficiente para satisfacer las necesidades de los clientes. 
@@ -35,12 +35,31 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 **_Capa de datos:_** Almacena los datos. 
 
-![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capas.png)
+<p align="center">
+  <img width="500" height="500" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capas.png">
+</p>
 
-![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capa.png)
+<p align="center">
+  <img width="500" height="500" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capa.png">
+</p>
+
 
 - **Diagrama de arquitectura con descripción (Arquitectura del proyecto completo):**
+- 
 - **Diagrama de secuencia para los procesos más importante de la App (CRUD)**
+
+**Creando un usuario:**
+
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/create-user.png)
+
+**Buscando un producto por el cliente:**
+
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/read-products.png)
+
+**Comprando productos**
+
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/buy-product.png)
+
 - **Diagrama de base de la base de datos**
 
 ![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/base-datos.png)
