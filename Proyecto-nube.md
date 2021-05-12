@@ -40,6 +40,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 <p align="center">
   <img width="500" height="500" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/diagrama_arquitectura.png">
 </p>
+
 - **Diagrama de secuencia para los procesos más importante de la App (CRUD)**
 
 **Creando un usuario:**
@@ -719,14 +720,14 @@ Se plantea que el sistema deba de cumplir con la Norma de Evaluación ISO/IEC 91
 
 **_Seguridad:_** La capacidad del software para proteger la información y los datos de manera que los usuarios o los sistemas no autorizados no puedan acceder a ellos para realizar operaciones, y la capacidad de aceptar el acceso a los datos de los usuarios o sistemas autorizados.
 
-**Conformidad de la funcionalidad:_** La capacidad del software de cumplir los estándares referentes a la funcionalidad.
+**_Conformidad de la funcionalidad:_** La capacidad del software de cumplir los estándares referentes a la funcionalidad.
 
 
 - **La eficiencia se divide en 3 criterios:**
 
-**Comportamiento de tiempos:_** Los tiempos adecuados de respuesta y procesamiento, el rendimiento cuando realiza su función en condiciones específicas. Ejemplo, ejecutar el procedimiento más complejo del software y esperar su tiempo de respuesta, realizar la misma función, pero con más cantidad de registros.
+**_Comportamiento de tiempos:_** Los tiempos adecuados de respuesta y procesamiento, el rendimiento cuando realiza su función en condiciones específicas. Ejemplo, ejecutar el procedimiento más complejo del software y esperar su tiempo de respuesta, realizar la misma función, pero con más cantidad de registros.
 
-**Utilización de recursos:_** La capacidad del software para utilizar cantidades y tipos adecuados de recursos cuando este funciona bajo requerimientos o condiciones establecidas. Ejemplo, los recursos humanos, el hardware, dispositivos externos.
+**_Utilización de recursos:_** La capacidad del software para utilizar cantidades y tipos adecuados de recursos cuando este funciona bajo requerimientos o condiciones establecidas. Ejemplo, los recursos humanos, el hardware, dispositivos externos.
 
 **_Conformidad de eficiencia:_** La capacidad que tiene el software para cumplir con los estándares o convenciones relacionados a la eficiencia.
 
