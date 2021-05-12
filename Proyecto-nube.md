@@ -521,7 +521,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
              {
             “id”: 1,
-            “name”: “bicicleta”,
+            “name”: “Merida”,
             }
 
 ### Address
