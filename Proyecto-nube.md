@@ -45,7 +45,9 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 
 - **Diagrama de arquitectura con descripción (Arquitectura del proyecto completo):**
-- 
+<p align="center">
+  <img width="500" height="500" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/diagrama_arquitectura.png">
+</p>
 - **Diagrama de secuencia para los procesos más importante de la App (CRUD)**
 
 **Creando un usuario:**
