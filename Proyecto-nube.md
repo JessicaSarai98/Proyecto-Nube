@@ -35,12 +35,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 **_Capa de datos:_** Almacena los datos. 
 
-- **Diagrama de arquitectura con descripción (Arquitectura del proyecto completo):**
-
 ![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capas.png)
 
 ![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capa.png)
 
+- **Diagrama de arquitectura con descripción (Arquitectura del proyecto completo):**
 - **Diagrama de secuencia para los procesos más importante de la App (CRUD)**
 - **Diagrama de base de la base de datos**
 
@@ -138,7 +137,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 # Documentación de la API
 
-## Documentación individual de cada Endpoint por cada entidad**
+## Documentación individual de cada Endpoint por cada entidad
 
 ## **URL(URI)**
 
@@ -213,7 +212,8 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
                           “city_id”: “1”, 
                            “vehicle_id”:1
                           }
-     - Response
+     - https://localhost:8080/delivery_man
+   - Response
       
                {
               “user_id”: 1,
@@ -261,7 +261,8 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “address”: “calle 29 merida yucatan”, 
           “city_id”: “1”, 
           }
-     - Response:
+     - https://localhost:8080/api/salesman
+  - Response:
 
             {
             “user_id”: 2,
@@ -310,7 +311,9 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “payment_type_id”: 1, 
           }
        
-     - Response: 
+     - https://localhost:8080/api/customer
+     
+   - Response: 
 
             {
             “user_id”: 1,
@@ -323,10 +326,408 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             “payment_type_id”: 1, 
             }
 
+### Commerce
+- GET/commerce -> Devuelve una lista de comercios
+- GET/commerce/id -> Devuelve un comercio especifico
+- POST/commerce -> Crea un nuevo comercio
+- PUT/commerce/id -> Actualiza el comercio con el id correspondiente
+- DELETE/commerce/id -> Elimina el comercio con el id correspondiente
 
+### Campos requeridos
+**POST:** username, password, email, type
 
+### Tipo de dato y validaciones 
+- **Integer salesman_id** [int(10)] -> exista un salesman con el mismo id
+- **String commercial_name** [[varchar(128)]-> NOT NULL
+- **String rfc** [varchar(12)]->  NOT NULL
+- **String description** [varchar(100)]->  not null
+- **String phone** [varchar(175)] -> NOT NULL
+- **String address** [varchar(175)] -> NOT NULL
+- **Integer city_id** [int(10)] -> NOT NULL
+- **String logo** [varchar(100)] -> NOT NULL
 
+### Ejemplo del Request y Response
+- Crear un comercio(POST)
+  - Request
+    - customer_Data= 
 
+          {
+          “salesman_id”: 1,
+          commercial_name”: “coca cola”, 
+          “rfc”: “12144324”, 
+          “description”: “refrescos”, 
+          “phone”: “99765656”, 
+          “address”: “calle 29 merida yucatan”, 
+          “city_id”: 1,
+          “logo”: “https://i.blogs.es/6091fa/java/450_1000.jpg” 
+          }
+     - https://localhost:8080/api/commerce
+
+   - Response: 
+
+            {
+            “user_id”: 1,
+            “ firstname”: “Efrain”, 
+            “lastname”: “ake”, 
+            “cellphone”: “9997234556”, 
+            “sex”: “hombre”, 
+            “birth_date”: “12-12-2021”, 
+            “address”: “calle 29 merida yucatan”, 
+            “payment_type_id”: 1, 
+            }
+          
+### Product 
+- GET/product -> Devuelve una lista de productos
+- GET/product/id -> Devuelve un producto especifico
+- POST/product -> Crea un nuevo producto
+- PUT/product/id -> Actualiza el producto con el id correspondiente
+- DELETE/product/id -> Elimina el producto con el id correspondiente
+
+### Campos requeridos
+**POST:** name
+
+### Tipo de dato y validaciones 
+- **String name** [[varchar(128)]-> NOT NULL
+
+### Ejemplo del Request y Response
+- Crear un producto(POST)
+  - Request
+    - producto_Data= 
+
+          {
+          “name”: “galletas”,
+          }
+
+     - https://localhost:8080/api/producto
+
+   - Response: 
+
+             {
+            “id”: 1,
+            “name”: “galletas”,
+            }
+           
+### Commerce_product
+- GET/commerce-product -> Devuelve una lista de productos de un comercio
+- GET/commerce-product/id -> Devuelve un producto de un comercio especifico
+- POST/commerce-product -> Crea un nuevo producto de un comercio
+- PUT/commerce-product/id -> Actualiza el producto de un comercio con el id correspondiente
+- DELETE/commerce-product/id -> Elimina el producto de un comercio con el ud correspondiente
+
+### Campos requeridos
+**POST:** commerce_id, producto_id, description, price, stock
+
+### Tipo de dato y validaciones 
+- **Integer commerce_id** [int(10)] -> exista un comercio con el mismo id
+- **String description** [[varchar(100)]-> NOT NULL
+- **Double price** [Decimal(10,2)] -> NOT NULL
+- **Integer product_id** [int(10)] -> exista un producto con el mismo id
+- **Integer stock** [int(10)] -> NOT NULL, No mayor a cero 
+
+### Ejemplo del Request y Response
+- Crear un producto de un comercio(POST)
+  - Request
+    - RequestBody= 
+
+          {
+          “commerce_id”: 1, 
+          “product_id”: “5”, 
+          “desciption”: “coca-cola de medio litro”, 
+          “price”: 10.50, 
+          “stock”: 4}
+
+     - https://localhost:8080/api/commerce-product
+
+   - Response: 
+
+          {
+          “commerce_id”: 1, 
+          “product_id”: “5”, 
+          “desciption”: “coca-cola de medio litro”, 
+          “price”: 10.50, 
+          “stock”: 4
+          }
+
+### Vehicle
+- GET/vehicle -> Devuelve una lista de vehiculos
+- GET/vehicle/id -> Devuelve un vehiculo especifico
+- POST/vehicle -> Crea un nuevo vehiculo
+- PUT/vehicle/id -> Actualiza el vehiculo con el id correspondiente
+- DELETE/vehicle/id -> Elimina el vehiculo con el id correspondiente
+
+### Campos requeridos
+**POST:** name
+
+### Tipo de dato y validaciones 
+- **String name** [[varchar(128)]-> NOT NULL
+
+### Ejemplo del Request y Response
+- Crear un vehiculo(POST)
+  - Request
+    - vehicle_Data= 
+
+          {
+          “name”: “bicicleta”,
+          }
+
+     - https://localhost:8080/api/vehicle
+
+   - Response: 
+
+             {
+            “id”: 1,
+            “name”: “bicileta”,
+            }
+           
+### City
+- GET/city -> Devuelve una lista de ciudades
+- GET/city/id -> Devuelve una ciudad especifica
+- POST/city -> Crea una nuevo ciudad
+- PUT/city/id -> Actualiza la ciudad con el id correspondiente
+- DELETE/city/id -> Elimina la ciudad con el id correspondiente
+
+### Campos requeridos
+**POST:** name
+
+### Tipo de dato y validaciones 
+- **String name** [[varchar(128)]-> NOT NULL
+
+### Ejemplo del Request y Response
+- Crear una ciudad(POST)
+  - Request
+    - RequestBody= 
+
+          {
+          “name”: “Merida”,
+          }
+
+     - https://localhost:8080/api/city
+
+   - Response: 
+
+             {
+            “id”: 1,
+            “name”: “bicileta”,
+            }
+
+### Address
+- GET/address -> Devuelve una lista de direcciones
+- GET/address/id -> Devuelve una direccion especifica
+- POST/address -> Crea una nueva direccion
+- PUT/address/id -> Actualiza la direccion con el id correspondiente
+- DELETE/address/id -> Elimina la direccion con el id correspondiente
+
+### Campos requeridos
+**POST:** customer_id, street, crossing, suburb, city_id
+
+### Tipo de dato y validaciones 
+- **Integer customer_id** [int(10)] -> exista un customer con el mismo id
+- **String street** [[varchar(175)]-> NOT NULL
+- **String crossing** [varchar(128)]->  NOT NULL
+- **String suburb** [varchar(128)]->  not null
+- **Integer city_id** [int(10)] -> NOT NULL
+
+### Ejemplo del Request y Response
+- Crear una direccion(POST)
+  - Request
+    - address_Data= 
+
+          {
+            “customer_id”: 1, 
+           “street”: “calle 12 x 55 y 55”, 
+          “city_id”: 5
+ 
+          }
+     - https://localhost:8080/api/address
+
+   - Response: 
+
+          {
+          “customer_id”: 1, 
+          “street”: “calle 12 x 55 y 55”, 
+          “city_id”: 5, 
+          “crossing”: null, 
+          “suburb”: null
+          }
+
+### Order_detail
+- GET/order-detail -> Devuelve una lista de detalle de pedidos
+- GET/order-detail/id -> Devuelve un detalle de pedidos especifico
+- POST/order-detail -> Crea un detalle de pedido
+- PUT/order-detail/id -> Actualiza el detalle de pedido con el id correspondiente
+- DELETE/order-detail/id -> Elimina el detalle de pedido con el id correspondiente
+
+### Campos requeridos
+**POST:** order_id, commerce_product_id, amount
+
+### Tipo de dato y validaciones 
+- **Integer order_id** [int(10)] -> exista una orden con el mismo id
+- **Integer commerce_product_id** [int(10)] -> exista una commerce_product con el mismo id
+- **Integer amount** [int(10)] > NOT NULL
+- **Double subtotal** [Decimal(10,2)] -> NOT NULL
+- **Bool finished** [bool] -> por defecto 0
+
+### Ejemplo del Request y Response
+- Crear un detalle de orden(POST)
+  - Request
+    - order_detail_Data= 
+
+          {
+          “order_id”: 1, 
+          “commerce_product_id”: 4, 
+          “amount”: 2
+
+          }
+     - https://localhost:8080/api/order_detail
+
+   - Response: 
+
+            {
+            “id": "1",
+            name:"efectivo"
+            }
+            
+### Order
+- GET/order -> Devuelve una lista de pedidos
+- GET/order/id -> Devuelve un pedido especifico
+- POST/order -> Crea un nuevo pedido
+- PUT/order/id -> Actualiza el pedido con el id correspondiente
+- DELETE/order/id -> Elimina el pedido con el id correspondiente
+
+### Campos requeridos
+**POST:** customer_id
+
+### Tipo de dato y validaciones 
+- **Integer customer_id** [int(10)] -> exista una customer con el mismo id
+- **Integer delivery_man_id** [int(10)] -> exista una repartidor con el mismo id
+- **Integer status_id** [int(10)] -> exista un status con el mismo id
+- **Integer payment_type_id** [int(10)] -> exista un tipo de pago con el mismo id
+- **Double total** [Decimal(10,2)] -> NOT NULL
+- **String order_date** [datetime] -> NOT NULL, dd-mm-yyyy hh:mm:ss, yyyy< año en curso 18
+- **String delivered_date** [datetime] -> NOT NULL, dd-mm-yyyy hh:mm:ss, yyyy< año en curso 18
+
+### Ejemplo del Request y Response
+- Crear una orden(POST)
+  - Request
+    - order_Data= 
+
+          {
+          “customer_id": "1"
+
+          }
+     - https://localhost:8080/api/order
+
+   - Response: 
+
+            {
+           “id”: “1”,
+          “delivery_man_id”: null,
+          “customer_id”: “1”,
+          “status_id”: “1”,
+          “order_date”: “11-05-2021 12:00:32”,
+          “delivered_Date”: null,
+          “total”: “209”,
+          “payment_type”: “1”,
+          }
+
+### Payment_type
+- GET/payment_type -> Devuelve una lista de tipos de pago
+- GET/payment_type/id -> Devuelve un tipo de pago especifico
+- POST/payment_type -> Crea una nuevo tipo de pago
+- PUT/payment_type/id -> Actualiza el tipo de pago con el id correspondiente
+- DELETE/payment_type/id -> Elimina el tipo de pago con el id correspondiente
+
+### Campos requeridos
+**POST:** name
+
+### Tipo de dato y validaciones 
+- **String name** [[varchar(128)]-> NOT NULL
+
+### Ejemplo del Request y Response
+- Crear un tipo de pago(POST)
+  - Request
+    - payment_type_Data= 
+
+          {
+          “name”: “efectivo”,
+          }
+
+     - https://localhost:8080/api/payment_type
+
+   - Response: 
+
+             {
+            “id”: 1,
+            “name”: “efectivo”,
+            }
+
+### Order_status
+- GET/order_status -> Devuelve una lista de estados de orden
+- GET/order_status/id -> Devuelve unb estado de orden especifica
+- POST/order_status -> Crea un nuevo estado de orden
+- PUT/order_status/id -> Actualiza el estado de orden con el id correspondiente
+- DELETE/order_status/id -> Elimina el estado de orden con el id correspondiente
+
+### Campos requeridos
+**POST:** name
+
+### Tipo de dato y validaciones 
+- **String name** [[varchar(128)]-> NOT NULL
+
+### Ejemplo del Request y Response
+- Crear una ciudad(POST)
+  - Request
+    - order_status_Data= 
+
+          {
+          “name”: “aceptado”,
+          }
+
+     - https://localhost:8080/api/order-status
+
+   - Response: 
+
+             {
+            “id”: 1,
+            “name”: “aceptado”,
+            }
+            
+### Ejemplos del Request y Response
+- Crear un usuario(POST)
+  - Request
+    - User_Data =
+    
+          {“username”: “Efrain”, “password”: “1234AaBb”, “email”: “name@ejemplo.com”,             “type”: “customer”}
+    - https://localhost:8080/api/user
+    
+  - Response
+
+        {“id”: “1”,
+        “username”: “Efrain”, 
+        “password”: “1234AaBb”, 
+        “email”: “name@ejemplo.com”, 
+        “token”: “3434534$$%$%$%d”
+        “type”: “customer”
+        “registration_date”: “11-05-2021 12:01:44”
+         }
+
+            
+- Consultar un usuario(GET)
+  - Request       
+    - https://localhost:8080/api/user/10
+    
+  - Response
+  
+           {“id”: “1”, “username”: “Efrain”, “password”: “1234AaBb”, “email”:    “name@ejemplo.com”, “token”: “3434534$$%$%$%d”, “type”: “customer”, “registration_date”: “11-05-2021 12:01:44” }
+           
+   
+- Consultar un lista de usuarios(GET)
+  - Request       
+    - https://localhost:8080/api/users
+    
+  - Response
+  
+          [ {“id”: “1”, “username”: “Efrain”, “password”: “1234AaBb”, “email”: “12345”, “token”: “3434534$$%$%$%d”, “type”: “customer”, “registration_date”: “11-05-2021 12:01:44” }, {“id”: “2”, “username”: “Efrain2”, “password”: “1234AaBb”, “email”: “name2@ejemplo.com”, “token”: “34345s34$s$%$%$%d”, “type”: “customer”, “registration_date”: “11-05-2021 12:01:44” } ]}
 
     
 
