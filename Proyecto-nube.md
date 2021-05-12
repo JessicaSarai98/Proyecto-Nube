@@ -33,15 +33,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 **_Capa de persistencia:_** es la encargada de comunicarse a la base de datos, crear las instrucciones SQL para consultar, insertar, actualizar o borrar registros y retornarlos en un formato independiente a la base de datos.
 
-**_Capa de datos:_** Almacena los datos. 
-
-<p align="center">
-  <img width="500" height="500" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capas.png">
-</p>
-
-<p align="center">
-  <img width="500" height="500" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capa.png">
-</p>
+**_Origenes de datos:_** Datos almacenados en MySQL. 
 
 
 - **Diagrama de arquitectura con descripción (Arquitectura del proyecto completo):**
@@ -52,15 +44,15 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 **Creando un usuario:**
 
-![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/create-user.png)
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/registrar_cliente.png)
 
-**Buscando un producto por el cliente:**
+**Vendedor agrega un producto:**
 
-![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/read-products.png)
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/agregar_producto.png)
 
 **Comprando productos**
 
-![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/buy-product.png)
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/comprando_productos.png)
 
 - **Diagrama de base de la base de datos**
 
