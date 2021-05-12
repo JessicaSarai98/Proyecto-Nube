@@ -3,8 +3,8 @@
 ### Nombre: MarketApp
 
 ## Autores:
-- **Miguel Chay Nah**
-- **Efrain Aké Ojeda**
+- **Miguel Gilberto Chay Nah**
+- **Efrain Esaú Aké Ojeda**
 - **Jessica Sarai González Bautista**
 - **Karina Carmona Vargas**
 
@@ -162,10 +162,10 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 ### User:
 - GET/users -> Devuelve una lista de usuarios
-- GET/users/id -> Devuelve un usuario con id especifica
+- GET/users/{id} -> Devuelve un usuario con id especifica
 - POST/users -> Crea un nuevo usuario
-- PUT/users/id -> Actualiza el usuario onc id especifica
-- DELETE/users/id -> Elimina el usuario con id especifica
+- PUT/users/{id} -> Actualiza el usuario onc id especifica
+- DELETE/users/{id} -> Elimina el usuario con id especifica
 
 ### Campos requeridos
 **POST:** username, password, email, type, registration_date
@@ -180,7 +180,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un usuario (POST)
    - Request
-      - UserData = 
+      - RequestBody = 
       
             {“username”: “Efrain”, “password”: “1234AaBb”, “email”:  “name@ejemplo.com”, “type”: “customer”}
       - https://localhost:8080/api/users
@@ -195,11 +195,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             “registration_date”: “11-05-2021 12:01:44 }
 
 ### Delivery_man:
-- GET/delivery_man -> Devuelve una lista de repartidores
-- GET/delivery_man/id -> Devuelve un repartidor específico
-- POST/delivery_man -> Crea un nuevo repartidor
-- PUT/delivery_man/id -> Actualiza el repartidor con el id específico
-- DELETE/delivery_man/id -> Elimina el repartidor con el id correspondiente
+- GET/delivery_men -> Devuelve una lista de repartidores
+- GET/delivery_men/{id} -> Devuelve un repartidor específico
+- POST/delivery_men -> Crea un nuevo repartidor
+- PUT/delivery_men/{id} -> Actualiza el repartidor con el id específico
+- DELETE/delivery_men/{id} -> Elimina el repartidor con el id correspondiente
 
 ### Campos requeridos: 
 **POST:** user_id, firstname, lastname, cellphone, sex, birth_date, address, city_id, vehicle_id
@@ -218,7 +218,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un delivery_man(POST)
   - Request 
-    - delivery_man_Data=
+    - RequestBody=
     
     
                            {
@@ -231,7 +231,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
                           “city_id”: “1”, 
                            “vehicle_id”:1
                           }
-     - https://localhost:8080/delivery_man
+     - https://localhost:8080/api/delivery_men
    - Response
       
                {
@@ -246,11 +246,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
                “vehicle_id”:1
               }
 ### Salesman
-- GET/salesman -> Devuelve una lista de vendedores
-- GET/salesman/id -> Devuelve un vendedor especifico
-- POST/salesman -> Crea un nuevo vendedor
-- PUT/salesman/id -> Actualiza el vendedor con el id correspondiente
-- DELETE/salesman/id -> Elimina el vendedor con el ud correspondiente
+- GET/salesmen -> Devuelve una lista de vendedores
+- GET/salesmen/{id} -> Devuelve un vendedor especifico
+- POST/salesmen -> Crea un nuevo vendedor
+- PUT/salesmen/{id} -> Actualiza el vendedor con el id correspondiente
+- DELETE/salesmen/{id} -> Elimina el vendedor con el ud correspondiente
 
 ### Campos requeridos
 **POST:** user_id, firstname, lastname, cellphone, sex, birth_date, addressm city_id
@@ -268,7 +268,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response: 
 - Crear un salesman (POST)
   - Request
-    - salesman_Data=
+    - RequestBody=
 
           {
           “user_id”: 1,
@@ -280,7 +280,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “address”: “calle 29 merida yucatan”, 
           “city_id”: “1”, 
           }
-     - https://localhost:8080/api/salesman
+     - https://localhost:8080/api/salesmen
   - Response:
 
             {
@@ -296,10 +296,10 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 ### Customer
 - GET/customers -> Devuelve una lista de clientes
-- GET/customers/id -> Devuelve un cliente especifico
+- GET/customers/{id} -> Devuelve un cliente especifico
 - POST/customers -> Crea un nuevo cliente
-- PUT/customers/id -> Actualiza el cliente con el id correspondiente
-- DELETE/customers/id -> Elimina el cliente con el ud correspondiente
+- PUT/customers/{id} -> Actualiza el cliente con el id correspondiente
+- DELETE/customers/{id} -> Elimina el cliente con el ud correspondiente
 
 ### Campos requeridos
 **POST:** user_id, firstname, lastname, cellphone, sex, birth_date, address, payment_type_id
@@ -317,7 +317,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un customer(POST)
   - Request
-    - customer_Data= 
+    - RequestBody= 
 
           {
           “user_id”: 1,
@@ -330,7 +330,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “payment_type_id”: 1, 
           }
        
-     - https://localhost:8080/api/customer
+     - https://localhost:8080/api/customers
      
    - Response: 
 
@@ -346,11 +346,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             }
 
 ### Commerce
-- GET/commerce -> Devuelve una lista de comercios
-- GET/commerce/id -> Devuelve un comercio especifico
-- POST/commerce -> Crea un nuevo comercio
-- PUT/commerce/id -> Actualiza el comercio con el id correspondiente
-- DELETE/commerce/id -> Elimina el comercio con el id correspondiente
+- GET/commerces -> Devuelve una lista de comercios
+- GET/commerces/{id} -> Devuelve un comercio especifico
+- POST/commerces -> Crea un nuevo comercio
+- PUT/commerces/{id} -> Actualiza el comercio con el id correspondiente
+- DELETE/commerces/{id} -> Elimina el comercio con el id correspondiente
 
 ### Campos requeridos
 **POST:** username, password, email, type
@@ -368,7 +368,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un comercio(POST)
   - Request
-    - customer_Data= 
+    - RequestBody= 
 
           {
           “salesman_id”: 1,
@@ -380,7 +380,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “city_id”: 1,
           “logo”: “https://i.blogs.es/6091fa/java/450_1000.jpg” 
           }
-     - https://localhost:8080/api/commerce
+     - https://localhost:8080/api/commerces
 
    - Response: 
 
@@ -396,11 +396,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             }
           
 ### Product 
-- GET/product -> Devuelve una lista de productos
-- GET/product/id -> Devuelve un producto especifico
-- POST/product -> Crea un nuevo producto
-- PUT/product/id -> Actualiza el producto con el id correspondiente
-- DELETE/product/id -> Elimina el producto con el id correspondiente
+- GET/products -> Devuelve una lista de productos
+- GET/products/{id} -> Devuelve un producto especifico
+- POST/products -> Crea un nuevo producto
+- PUT/products/{id} -> Actualiza el producto con el id correspondiente
+- DELETE/products/{id} -> Elimina el producto con el id correspondiente
 
 ### Campos requeridos
 **POST:** name
@@ -411,13 +411,13 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un producto(POST)
   - Request
-    - producto_Data= 
+    - RequestBody= 
 
           {
           “name”: “galletas”,
           }
 
-     - https://localhost:8080/api/producto
+     - https://localhost:8080/api/products
 
    - Response: 
 
@@ -427,11 +427,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             }
            
 ### Commerce_product
-- GET/commerce-product -> Devuelve una lista de productos de un comercio
-- GET/commerce-product/id -> Devuelve un producto de un comercio especifico
-- POST/commerce-product -> Crea un nuevo producto de un comercio
-- PUT/commerce-product/id -> Actualiza el producto de un comercio con el id correspondiente
-- DELETE/commerce-product/id -> Elimina el producto de un comercio con el ud correspondiente
+- GET/commerce-products -> Devuelve una lista de productos de un comercio
+- GET/commerce-products/{id} -> Devuelve un producto de un comercio especifico
+- POST/commerce-products -> Crea un nuevo producto de un comercio
+- PUT/commerce-products/{id} -> Actualiza el producto de un comercio con el id correspondiente
+- DELETE/commerce-products/{id} -> Elimina el producto de un comercio con el ud correspondiente
 
 ### Campos requeridos
 **POST:** commerce_id, producto_id, description, price, stock
@@ -455,7 +455,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “price”: 10.50, 
           “stock”: 4}
 
-     - https://localhost:8080/api/commerce-product
+     - https://localhost:8080/api/commerce-products
 
    - Response: 
 
@@ -468,11 +468,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           }
 
 ### Vehicle
-- GET/vehicle -> Devuelve una lista de vehiculos
-- GET/vehicle/id -> Devuelve un vehiculo especifico
-- POST/vehicle -> Crea un nuevo vehiculo
-- PUT/vehicle/id -> Actualiza el vehiculo con el id correspondiente
-- DELETE/vehicle/id -> Elimina el vehiculo con el id correspondiente
+- GET/vehicles -> Devuelve una lista de vehiculos
+- GET/vehicles/{id} -> Devuelve un vehiculo especifico
+- POST/vehicles -> Crea un nuevo vehiculo
+- PUT/vehicles/{id} -> Actualiza el vehiculo con el id correspondiente
+- DELETE/vehicles/{id} -> Elimina el vehiculo con el id correspondiente
 
 ### Campos requeridos
 **POST:** name
@@ -483,27 +483,27 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un vehiculo(POST)
   - Request
-    - vehicle_Data= 
+    - RequestBody= 
 
           {
           “name”: “bicicleta”,
           }
 
-     - https://localhost:8080/api/vehicle
+     - https://localhost:8080/api/vehicles
 
    - Response: 
 
              {
             “id”: 1,
-            “name”: “bicileta”,
+            “name”: “bicicleta”,
             }
            
 ### City
-- GET/city -> Devuelve una lista de ciudades
-- GET/city/id -> Devuelve una ciudad especifica
-- POST/city -> Crea una nuevo ciudad
-- PUT/city/id -> Actualiza la ciudad con el id correspondiente
-- DELETE/city/id -> Elimina la ciudad con el id correspondiente
+- GET/cities -> Devuelve una lista de ciudades
+- GET/cities/{id} -> Devuelve una ciudad especifica
+- POST/cities -> Crea una nuevo ciudad
+- PUT/cities/{id} -> Actualiza la ciudad con el id correspondiente
+- DELETE/cities/{id} -> Elimina la ciudad con el id correspondiente
 
 ### Campos requeridos
 **POST:** name
@@ -520,7 +520,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “name”: “Merida”,
           }
 
-     - https://localhost:8080/api/city
+     - https://localhost:8080/api/cities
 
    - Response: 
 
@@ -530,11 +530,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             }
 
 ### Address
-- GET/address -> Devuelve una lista de direcciones
-- GET/address/id -> Devuelve una direccion especifica
-- POST/address -> Crea una nueva direccion
-- PUT/address/id -> Actualiza la direccion con el id correspondiente
-- DELETE/address/id -> Elimina la direccion con el id correspondiente
+- GET/addresses -> Devuelve una lista de direcciones
+- GET/addresses/{id} -> Devuelve una direccion especifica
+- POST/addresses -> Crea una nueva direccion
+- PUT/addresses/{id} -> Actualiza la direccion con el id correspondiente
+- DELETE/addresses/{id} -> Elimina la direccion con el id correspondiente
 
 ### Campos requeridos
 **POST:** customer_id, street, crossing, suburb, city_id
@@ -549,7 +549,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear una direccion(POST)
   - Request
-    - address_Data= 
+    - RequestBody= 
 
           {
             “customer_id”: 1, 
@@ -557,7 +557,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “city_id”: 5
  
           }
-     - https://localhost:8080/api/address
+     - https://localhost:8080/api/addresses
 
    - Response: 
 
@@ -570,11 +570,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           }
 
 ### Order_detail
-- GET/order-detail -> Devuelve una lista de detalle de pedidos
-- GET/order-detail/id -> Devuelve un detalle de pedidos especifico
-- POST/order-detail -> Crea un detalle de pedido
-- PUT/order-detail/id -> Actualiza el detalle de pedido con el id correspondiente
-- DELETE/order-detail/id -> Elimina el detalle de pedido con el id correspondiente
+- GET/order-details -> Devuelve una lista de detalle de pedidos
+- GET/order-details/{id} -> Devuelve un detalle de pedidos especifico
+- POST/order-details -> Crea un detalle de pedido
+- PUT/order-details/{id} -> Actualiza el detalle de pedido con el id correspondiente
+- DELETE/order-details/{id} -> Elimina el detalle de pedido con el id correspondiente
 
 ### Campos requeridos
 **POST:** order_id, commerce_product_id, amount
@@ -589,7 +589,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un detalle de orden(POST)
   - Request
-    - order_detail_Data= 
+    - RequestBody= 
 
           {
           “order_id”: 1, 
@@ -597,7 +597,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “amount”: 2
 
           }
-     - https://localhost:8080/api/order_detail
+     - https://localhost:8080/api/order_details
 
    - Response: 
 
@@ -607,11 +607,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             }
             
 ### Order
-- GET/order -> Devuelve una lista de pedidos
-- GET/order/id -> Devuelve un pedido especifico
-- POST/order -> Crea un nuevo pedido
-- PUT/order/id -> Actualiza el pedido con el id correspondiente
-- DELETE/order/id -> Elimina el pedido con el id correspondiente
+- GET/orders -> Devuelve una lista de pedidos
+- GET/orders/{id} -> Devuelve un pedido especifico
+- POST/orders -> Crea un nuevo pedido
+- PUT/orders/{id} -> Actualiza el pedido con el id correspondiente
+- DELETE/orders/{id} -> Elimina el pedido con el id correspondiente
 
 ### Campos requeridos
 **POST:** customer_id
@@ -628,13 +628,13 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear una orden(POST)
   - Request
-    - order_Data= 
+    - RequestBody= 
 
           {
           “customer_id": "1"
 
           }
-     - https://localhost:8080/api/order
+     - https://localhost:8080/api/orders
 
    - Response: 
 
@@ -650,11 +650,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           }
 
 ### Payment_type
-- GET/payment_type -> Devuelve una lista de tipos de pago
-- GET/payment_type/id -> Devuelve un tipo de pago especifico
-- POST/payment_type -> Crea una nuevo tipo de pago
-- PUT/payment_type/id -> Actualiza el tipo de pago con el id correspondiente
-- DELETE/payment_type/id -> Elimina el tipo de pago con el id correspondiente
+- GET/payment_types -> Devuelve una lista de tipos de pago
+- GET/payment_types/{id} -> Devuelve un tipo de pago especifico
+- POST/payment_types -> Crea una nuevo tipo de pago
+- PUT/payment_types/{id} -> Actualiza el tipo de pago con el id correspondiente
+- DELETE/payment_types/{id} -> Elimina el tipo de pago con el id correspondiente
 
 ### Campos requeridos
 **POST:** name
@@ -665,13 +665,13 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear un tipo de pago(POST)
   - Request
-    - payment_type_Data= 
+    - RequestBody= 
 
           {
           “name”: “efectivo”,
           }
 
-     - https://localhost:8080/api/payment_type
+     - https://localhost:8080/api/payment_types
 
    - Response: 
 
@@ -681,11 +681,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             }
 
 ### Order_status
-- GET/order_status -> Devuelve una lista de estados de orden
-- GET/order_status/id -> Devuelve unb estado de orden especifica
-- POST/order_status -> Crea un nuevo estado de orden
-- PUT/order_status/id -> Actualiza el estado de orden con el id correspondiente
-- DELETE/order_status/id -> Elimina el estado de orden con el id correspondiente
+- GET/order_statuses -> Devuelve una lista de estados de orden
+- GET/order_statuses/{id} -> Devuelve unb estado de orden especifica
+- POST/order_statuses -> Crea un nuevo estado de orden
+- PUT/order_statuses/{id} -> Actualiza el estado de orden con el id correspondiente
+- DELETE/order_statuses/{id} -> Elimina el estado de orden con el id correspondiente
 
 ### Campos requeridos
 **POST:** name
@@ -696,13 +696,13 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 ### Ejemplo del Request y Response
 - Crear una ciudad(POST)
   - Request
-    - order_status_Data= 
+    - RequestBody= 
 
           {
           “name”: “aceptado”,
           }
 
-     - https://localhost:8080/api/order-status
+     - https://localhost:8080/api/order-statuses
 
    - Response: 
 
@@ -711,43 +711,6 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             “name”: “aceptado”,
             }
             
-### Ejemplos del Request y Response
-- Crear un usuario(POST)
-  - Request
-    - User_Data =
-    
-          {“username”: “Efrain”, “password”: “1234AaBb”, “email”: “name@ejemplo.com”,             “type”: “customer”}
-    - https://localhost:8080/api/user
-    
-  - Response
 
-        {“id”: “1”,
-        “username”: “Efrain”, 
-        “password”: “1234AaBb”, 
-        “email”: “name@ejemplo.com”, 
-        “token”: “3434534$$%$%$%d”
-        “type”: “customer”
-        “registration_date”: “11-05-2021 12:01:44”
-         }
-
-            
-- Consultar un usuario(GET)
-  - Request       
-    - https://localhost:8080/api/user/10
-    
-  - Response
-  
-           {“id”: “1”, “username”: “Efrain”, “password”: “1234AaBb”, “email”:    “name@ejemplo.com”, “token”: “3434534$$%$%$%d”, “type”: “customer”, “registration_date”: “11-05-2021 12:01:44” }
-           
-   
-- Consultar un lista de usuarios(GET)
-  - Request       
-    - https://localhost:8080/api/users
-    
-  - Response
-  
-          [ {“id”: “1”, “username”: “Efrain”, “password”: “1234AaBb”, “email”: “12345”, “token”: “3434534$$%$%$%d”, “type”: “customer”, “registration_date”: “11-05-2021 12:01:44” }, {“id”: “2”, “username”: “Efrain2”, “password”: “1234AaBb”, “email”: “name2@ejemplo.com”, “token”: “34345s34$s$%$%$%d”, “type”: “customer”, “registration_date”: “11-05-2021 12:01:44” } ]}
-
-    
 
 
