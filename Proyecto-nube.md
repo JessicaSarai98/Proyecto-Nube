@@ -1,6 +1,7 @@
 # Desarrollo de Aplicaciones en la Nube 
-### Documento de Arquitectura del Software
-#### MarketApp
+## Documento de Arquitectura del Software
+### MarketApp
+
 ## Autores:
 - **Miguel Chay Nah**
 - **Efrain Aké Ojeda**
@@ -137,7 +138,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
 # Documentación de la API
 
-**Documentación individual de cada Endpoint por cada entidad**
+## Documentación individual de cada Endpoint por cada entidad**
 
 ## **URL(URI)**
 
@@ -175,9 +176,158 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             “type”: “customer”
             “registration_date”: “11-05-2021 12:01:44 }
 
+### Delivery_man:
+- GET/delivery_man -> Devuelve una lista de repartidores
+- GET/delivery_man/id -> Devuelve un repartidor específico
+- POST/delivery_man -> Crea un nuevo repartidor
+- PUT/delivery_man/id -> Actualiza el repartidor con el id específico
+- DELETE/delivery_man/id -> Elimina el repartidor con el id correspondiente
+
+### Campos requeridos: 
+**POST:** user_id, firstname, lastname, cellphone, sex, birth_date, address, city_id, vehicle_id
+
+### Tipo de dato y validaciones:
+- **Integer user_id** [int(10)] -> exista un user con el mismo id
+- **String firstname** [[varchar(128)]-> NOT NULL
+- **String lastname** [varchar(128)]->  NOT NULL
+- **String cellphone** [varchar(40)]->  not null
+- **Strig sex** [enum('man','woman')] -> NOT NULL
+- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, yyyy>año en curso - 18
+- **String address** [varchar(175)] -> NOT NULL
+- **Integer city_id** [int(10)] -> NOT NULL
+- **Integer vehicle_id** [int(10)] -> NOT NULL
+
+### Ejemplo del Request y Response
+- Crear un delivery_man(POST)
+  - Request 
+    - delivery_man_Data=
+    
+    
+                           {
+                          “ firstname”: “Efrain”, 
+                          “lastname”: “ake”, 
+                          “cellphone”: “9997234556”, 
+                          “sex”: “hombre”, 
+                          “birth_date”: “12-12-2021”, 
+                          “address”: “calle 29 merida yucatan”, 
+                          “city_id”: “1”, 
+                           “vehicle_id”:1
+                          }
+     - Response
+      
+               {
+              “user_id”: 1,
+              “ firstname”: “Efrain”, 
+              “lastname”: “ake”, 
+              “cellphone”: “9997234556”, 
+              “sex”: “hombre”, 
+              “birth_date”: “12-12-2021”, 
+              “address”: “calle 29 merida yucatan”, 
+              “city_id”: “1”, 
+               “vehicle_id”:1
+              }
+### Salesman
+- GET/salesman -> Devuelve una lista de vendedores
+- GET/salesman/id -> Devuelve un vendedor especifico
+- POST/salesman -> Crea un nuevo vendedor
+- PUT/salesman/id -> Actualiza el vendedor con el id correspondiente
+- DELETE/salesman/id -> Elimina el vendedor con el ud correspondiente
+
+### Campos requeridos
+**POST:** user_id, firstname, lastname, cellphone, sex, birth_date, addressm city_id
+
+### Tipo de dato y validaciones
+- **Integer user_id** [int(10)] -> exista un user con el mismo id
+- **String firstname** [[varchar(128)]-> NOT NULL
+- **String lastname** [varchar(128)]->  NOT NULL
+- **String cellphone** [varchar(40)]->  not null
+- **Strig sex** [enum('man','woman')] -> NOT NULL
+- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, yyyy>año en curso - 18
+- **String address** [varchar(175)] -> NOT NULL
+- **Integer city_id** [int(10)] -> NOT NULL
+
+### Ejemplo del Request y Response: 
+- Crear un salesman (POST)
+  - Request
+    - salesman_Data=
+
+          {
+          “user_id”: 1,
+          “ firstname”: “Efrain”, 
+          “lastname”: “ake”, 
+          “cellphone”: “9997234556”, 
+          “sex”: “hombre”, 
+          “birth_date”: “12-12-2021”, 
+          “address”: “calle 29 merida yucatan”, 
+          “city_id”: “1”, 
+          }
+     - Response:
+
+            {
+            “user_id”: 2,
+            “ firstname”: “Juan”, 
+            “lastname”: “Alvarez”, 
+            “cellphone”: “9997234556”, 
+            “sex”: “hombre”, 
+            “birth_date”: “12-12-2021”, 
+            “address”: “calle 29 merida yucatan”, 
+            “city_id”: “1”, 
+            }
+
+### Customer
+- GET/customers -> Devuelve una lista de clientes
+- GET/customers/id -> Devuelve un cliente especifico
+- POST/customers -> Crea un nuevo cliente
+- PUT/customers/id -> Actualiza el cliente con el id correspondiente
+- DELETE/customers/id -> Elimina el cliente con el ud correspondiente
+
+### Campos requeridos
+**POST:** user_id, firstname, lastname, cellphone, sex, birth_date, address, payment_type_id
+
+### Tipo de dato y validaciones 
+- **Integer user_id** [int(10)] -> exista un user con el mismo id
+- **String firstname** [[varchar(128)]-> NOT NULL
+- **String lastname** [varchar(128)]->  NOT NULL
+- **String cellphone** [varchar(40)]->  not null
+- **Strig sex** [enum('man','woman')] -> NOT NULL
+- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, yyyy>año en curso - 18
+- **Integer address_id** [int(10)] -> existe un address con el mismo id
+- **Integer payment_type_id** [int(10)] -> existe un payment con el mismo id
+
+### Ejemplo del Request y Response
+- Crear un customer(POST)
+  - Request
+    - customer_Data= 
+
+          {
+          “user_id”: 1,
+          “ firstname”: “Efrain”, 
+          “lastname”: “ake”, 
+          “cellphone”: “9997234556”, 
+          “sex”: “hombre”, 
+          “birth_date”: “12-12-2021”, 
+          “address”: “calle 29 merida yucatan”, 
+          “payment_type_id”: 1, 
+          }
+       
+     - Response: 
+
+            {
+            “user_id”: 1,
+            “ firstname”: “Efrain”, 
+            “lastname”: “ake”, 
+            “cellphone”: “9997234556”, 
+            “sex”: “hombre”, 
+            “birth_date”: “12-12-2021”, 
+            “address”: “calle 29 merida yucatan”, 
+            “payment_type_id”: 1, 
+            }
 
 
 
 
+
+
+    
 
 
