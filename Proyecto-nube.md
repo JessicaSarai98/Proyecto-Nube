@@ -705,22 +705,30 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             “name”: “aceptado”,
             }
             
-# **Criterios de Calidad:**
-Se plantea que el sistema deba de cumplir con la Norma de Evaluación ISO/IEC 9126 de Funcionalidad y eficiencia, el cual la efic es la capacidad del software de cumplir y proveer las funciones para satisfacer las necesidades explícitas e implícitas cuando es utilizado en condiciones específicas. Por otro lado, La eficiencia del software es la forma del desempeño adecuado, de acuerdo con el número recursos utilizados según las condiciones planteadas. Se debe tener en cuenta otros aspectos como la configuración de hardware, el sistema operativo, entre otros.
+# Criterios de calidad
+Se plantea que el sistema deba de cumplir con la Norma de Evaluación ISO/IEC 9126 de Funcionalidad y eficiencia, el cual la eficiencia es la capacidad del software de cumplir y proveer las funciones para satisfacer las necesidades explícitas e implícitas cuando es utilizado en condiciones específicas. Por otro lado, La eficiencia del software es la forma del desempeño adecuado, de acuerdo con el número recursos utilizados según las condiciones planteadas. Se debe tener en cuenta otros aspectos como la configuración de hardware, el sistema operativo, entre otros.
 
-La funcionalidad se divide en 5 criterios: 
-**Adecuación:** La capacidad del software para proveer un adecuado conjunto de funciones que cumplan las tareas y objetivos especificados por el usuario.
-**Exactitud:** La capacidad del software para hacer procesos y entregar los resultados solicitados con precisión o de forma esperada.
-**Interoperabilidad:** La capacidad del software de interactuar con uno o más sistemas específicos.
-**Seguridad:** La capacidad del software para proteger la información y los datos de manera que los usuarios o los sistemas no autorizados no puedan acceder a ellos para realizar operaciones, y la capacidad de aceptar el acceso a los datos de los usuarios o sistemas autorizados
-**Conformidad de la funcionalidad:** La capacidad del software de cumplir los estándares referentes a la funcionalidad.
 
-**La eficiencia se divide en 3 criterios:**
- **Comportamiento de tiempos:** Los tiempos adecuados de respuesta y procesamiento, el rendimiento cuando realiza su función en condiciones específicas. Ejemplo, ejecutar el procedimiento más complejo del software y esperar su tiempo de respuesta, realizar la misma función, pero con más cantidad de registros.
+- **La funcionalidad se divide en 5 criterios:**
 
-**Utilización de recursos:** La capacidad del software para utilizar cantidades y tipos adecuados de recursos cuando este funciona bajo requerimientos o condiciones establecidas. Ejemplo, los recursos humanos, el hardware, dispositivos externos.
+**_Adecuación:_** La capacidad del software para proveer un adecuado conjunto de funciones que cumplan las tareas y objetivos especificados por el usuario.
 
-**Conformidad de eficiencia:** La capacidad que tiene el software para cumplir con los estándares o convenciones relacionados a la eficiencia.
+**_Exactitud:_** La capacidad del software para hacer procesos y entregar los resultados solicitados con precisión o de forma esperada.
+
+**_Interoperabilidad:_** La capacidad del software de interactuar con uno o más sistemas específicos.
+
+**_Seguridad:_** La capacidad del software para proteger la información y los datos de manera que los usuarios o los sistemas no autorizados no puedan acceder a ellos para realizar operaciones, y la capacidad de aceptar el acceso a los datos de los usuarios o sistemas autorizados.
+
+**Conformidad de la funcionalidad:_** La capacidad del software de cumplir los estándares referentes a la funcionalidad.
+
+
+- **La eficiencia se divide en 3 criterios:**
+
+**Comportamiento de tiempos:_** Los tiempos adecuados de respuesta y procesamiento, el rendimiento cuando realiza su función en condiciones específicas. Ejemplo, ejecutar el procedimiento más complejo del software y esperar su tiempo de respuesta, realizar la misma función, pero con más cantidad de registros.
+
+**Utilización de recursos:_** La capacidad del software para utilizar cantidades y tipos adecuados de recursos cuando este funciona bajo requerimientos o condiciones establecidas. Ejemplo, los recursos humanos, el hardware, dispositivos externos.
+
+**_Conformidad de eficiencia:_** La capacidad que tiene el software para cumplir con los estándares o convenciones relacionados a la eficiencia.
 
 
 
