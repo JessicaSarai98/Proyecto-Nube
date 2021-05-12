@@ -1,76 +1,181 @@
 # Desarrollo de Aplicaciones en la Nube 
 ### Documento de Arquitectura del Software
-#### -Nombre del proyecto-
+#### MarketApp
 ## Autores:
 - **Miguel Chay Nah**
 - **Efrain Aké Ojeda**
 - **Jessica Sarai González Bautista**
 - **Karina Carmona Vargas**
-
+- 
 # Introducción
-- **Propósito:**
-   Actualmente, existen muchos negocios locales que no tienen la facilidad de promocionar sus productos o no cuentan con un poder adquisitivo suficiente para añadirse a plataformas en los cuales les ayuden a distribuir su producto. El propósito de esta aplicación es ayudar a los negocios locales a promocionar y expandir su negocio, en su pueblo o ciudad, de forma que su clientela aumente, también que brinden un servicio eficiente para satisfacer las necesidades de los clientes. 
-- **Alcance**
+# **Propósito:**
+Actualmente, existen muchos negocios locales que no tienen la facilidad de promocionar sus productos o no cuentan con un poder adquisitivo suficiente para añadirse a      plataformas en los cuales les ayuden a distribuir su producto. El propósito de esta aplicación es ayudar a los negocios locales a promocionar y expandir su negocio, en su pueblo o ciudad, de forma que su clientela aumente, también que brinden un servicio eficiente para satisfacer las necesidades de los clientes. 
+
+# **Alcance:**
+En este proyecto se centra en que los vendedores de comercios locales, puedan expandir su negocio, generando ingresos y clientes. Por otra parte, por la pandemia, se ha visto afectado muchos locales debido a que no se debe de salir ni estar en lugares concurridos, por lo que muchos negocios han cerrado al no tener clientes ni ingresos. A las personas se le es fácil y práctico revisar los productos en un dispositivo y solicitarlos con un simple clic, para que estos sean llevados a su dirección sin tener que salir de casa. Solo recibir el producto, desinfectalo y listo. 
+Para poder lograr esto nos debemos de enfocar en:
+
+- _El lado de los usuarios_: permitir que creen una cuenta (vendedor, cliente o repartidor) usando una dirección de correo electrónico. Cliente: capacidad de elegir el comercio y pedidos. Vendedor: capacidad de recibir ordenes de los clientes y de mostrar en la app los productos disponibles. Repartidor: capacidad de elegir la orden y de entregarlo al cliente. 
+- _El lado del comercio:_ la aplicación para poder registrar usuarios, capturar información pertinente sobre el comercio como su nombre, ubicación, información de vendedores, etc.Publicar sus productos y dar seguimiento a los pedidos entrantes y actualizar sobre el estado de sus ordenes. 
+Todo esto se puede lograr mediante API para responder consultas sobre lugares a traves de solicitudes HTTP, incluida ubicaciones geográficas y establecimientos comerciales. 
+
 - **Documentos de referencia**
+
+[API](https://fulcrum.rocks/blog/food-delivery-app/)
+
 # Arquitectura
 - **Descripción de la arquitectura usada (capas)(Describir responsabilidades de las capas):**
+
 **_Capa de presentación:_** se encarga de presentar la información de forma agradable al usuario, pero no le interesa de donde viene la información ni la lógica de negocio que hay detrás, en su lugar, solo sabe que existe una capa de negocio que le proporcionará la información.
+
 **_Capa de negocio:_** se encarga de aplicar todas las reglas de negocio y validaciones, pero no le interesa como recuperar los datos, guardarlos o borrarlos, ya que para eso tiene una capa de persistencia que se encarga de eso.
-**_Capa de persistencia:__** es la encargada de comunicarse a la base de datos, crear las instrucciones SQL para consultar, insertar, actualizar o borrar registros y retornarlos en un formato independiente a la base de datos.
+
+**_Capa de persistencia:_** es la encargada de comunicarse a la base de datos, crear las instrucciones SQL para consultar, insertar, actualizar o borrar registros y retornarlos en un formato independiente a la base de datos.
+
 **_Capa de datos:_** Almacena los datos. 
 
 - **Diagrama de arquitectura con descripción (Arquitectura del proyecto completo):**
 
-- **Diagrama de secuencia para los procesos más importante de la App (CRUD)**
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capas.png)
 
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/capa.png)
+
+- **Diagrama de secuencia para los procesos más importante de la App (CRUD)**
 - **Diagrama de base de la base de datos**
+
+![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/base-datos.png)
 
 - **Descripción de las entidades**
 
-_User:_
+**_User:_** esta entidad es la identificación de los usuarios que entren a la aplicación para darse de alta, como: cliente, vendedor y comercio. Esta entidad tiene los siguientes atributos: ID, nombre de usuario, correo, contraseña, token, el tipo de usuario y la fecha de registro. 
 
-_Customer:_
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/User.png">
+</p>
 
-_salesman:_
+**_Customer:_** esta entidad “Cliente”, como su nombre dice es para la persona que comprará los productos disponibles, obtiene dos llaves foráneas, el user_id de la entidad User, address_id de la entidad Address y payment_type_id de la entidad payment_type. Tambien se tienen los atributos como: nombre, apellido, teléfono y género. 
 
-_commerce:_
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/customer.png">
+</p>
 
-_delivery_man:_
+**_salesman:_** esta entidad “Vendedor”, como su nombre dice, es el responsable en vender sus productos a los clientes. Obtiene dos llaves foráneas, el user_id de la entidad User y city_id de la entidad City. Sus otros atributos son el nombre, apellido, teléfono, género, fecha de nacimiento y dirección. 
 
-_City_id:_
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/salesman.png">
+</p>
 
-_vehicle:_
+**_commerce:_** esta entidad “Comercio”, se refiere al negocio donde saldrán los productos solicitados por los clientes. Obtiene dos llaves fóraneas, salesman_id de la entidad Salesman y city_id de la entidad City. Sus otros atributos son el nombre, rfc, descripción del lugar, teléfono, dirección y logo. 
 
-_order:_
+<p align="center">
+  <img width="300" height="350" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/commerce.png">
+</p>
 
-_order_detail:_
+**_delivery_man:_** esta entidad “Repartidor”, como su nombre dice, es la persona responsable en recoger el producto solicitado por el cliente y llevarlo a su dirección. Obtiene tres llaves foráneas, user_id de la entidad User, city_id de la entidad City y vehicle_id de la entidad Vehicle.  Tambien obtiene los atributos como nombre, apellido, teléfono, género, fecha de nacimiento y dirección. 
 
-_order_statusr:_
+<p align="center">
+  <img width="300" height="350" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/delivery_man.png">
+</p>
 
-_payment_type:_
+**_City_id:_** Esta entidad “Ciudad” se refiere a la ciudad donde se encuentran los clientes, los repartidores y los negocios. Tiene los atributos de ID y el nombre. 
 
-_address:_
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/city.png">
+</p>
 
-_product:_
+**_vehicle:_** esta entidad “Vehiculo” se refiere al tipo de vehiculo que el repartidor utiliza para llevar los productos solicitados por los clientes. Tiene los atributos de ID y el nombre (tipo). 
 
-_commerce_product:_
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/vehicle.png">
+</p>
 
+**_order:_** esta entidad “Orden” se refiere a los productos solicitados por el cliente. Obtiene cuatro llaves foráneas, delivery_man_id de la entidad Delivery_man, customer_id de la entidad Customer y status_id de la entidad order_status. Tambien tiene los atributos de fecha de orden (fecha y hora) y la fecha de entrega (fecha y hora) y el precio total. 
+
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/order.png">
+</p>
+
+**_order_detail:_** esta entidad “detalle del orden”, se refiere a los detalles de la orden y del producto, tomando como llave foránea el order_id de la entidad Order y commerce_product_id de la entidad commerce_product. Tambien tiene los atributos como la cantidad de la orden, el subtotal y un valor booleano para saber si la orden ha sido entregada o aún no. 
+
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/order_detail.png">
+</p>
+
+**_order_status:_** esta entidad “estatus del orden” se refiere si el pedido ha sido aceptado, rechazado, si se está preparando, en camino o ya ha sido entregado. Tiene como atributos el ID y su nombre(los cuales son las acciones especificadas). 
+
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/order_status.png">
+</p>
+
+**_payment_type:_** esta entidad “tipo de pago”, como su nombre dice, se refiere al tipo de pago que el cliente podrá realizar como efectivo o en tarjeta. Tiene los atributos id y el nombre (tipo).
+
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/payment_type.png">
+</p>
+
+**_address:_** esta entidad “Dirección” como su nombre dice, se refiere a la o las direcciones que el cliente puede guardar, ya que en ocasiones no siempre se está en el mismo lugar (trabajo, escuela, casa, etc) entonces esta bien añadir más direcciones de entrega, en caso de requerirlo. Obtiene dos llaves foraneas, city_id de la entidad City y customer_id de la entidad Customer. Tiene otros atributos como el ID, calle, cruzamiento y colonia. 
+
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/address.png">
+</p>
+
+**_product:_** esta entidad “Producto” como su nombre dice, se refiere a los productos que el negocio vende. Tiene los atributos ID y nombre. 
+
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/product.png">
+</p>
+
+**_commerce_product:_** esta entidad “productos del comercio” como su nombre dice, se refiere a los productos que se venden en el comercio. Se obtiene dos llaves foraneas, commerce_id de Commerce y product_id de Product. Tiene atributos como descripcion, precio y cantidad disponible. 
+
+<p align="center">
+  <img width="300" height="300" src="https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/commerce_product.png">
+</p>
 
 - **Diagrama entidad relacion**
 
 ![image](https://github.com/JessicaSarai98/Proyecto-Nube/blob/main/imagenes/entidad-relacion.PNG)
 
 # Documentación de la API
-**Documentación individual de cada Endpoint por cada entidad**
-- **URL(URI)**
-- **Descripción**
-- **Campos requeridos**
-- **Validaciones**
-- **Tipo de datos de cada campo**
-- **Respuesta (Response)**
-- **Ejemplos del Request**
 
-# Criterios de calidad
+**Documentación individual de cada Endpoint por cada entidad**
+
+## **URL(URI)**
+
+### User:
+- GET/users -> Devuelve una lista de usuarios
+- GET/users/id -> Devuelve un usuario con id especifica
+- POST/users -> Crea un nuevo usuario
+- PUT/users/id -> Actualiza el usuario onc id especifica
+- DELETE/users/id -> Elimina el usuario con id especifica
+
+### Campos requeridos
+**POST:** username, password, email, type, registration_date
+
+### Tipo de dato y validaciones:
+- **String username** [varchar(128)] -> NOT NULL
+- **String password** [varchar(128)] -> NOT NULL, caracteres >= 8, contenga dígitos, minúsculas y mayúsculas.
+- **String email** [varchar(175)] -> NOT NULL, perteneciente a RegEx email según w3.org
+- **String type** [enum(‘delivery_man’, ‘salesman’ , ‘customer’)]-> NOT NULL
+- **String registration_date** [date]-> no vacio, dd-mm-yyyy, yyyy>año en curso - 18
+
+### Ejemplo del Request y Response
+- Crear un usuario (POST)
+   - Request
+      - UserData = 
+      
+            {“username”: “Efrain”, “password”: “1234AaBb”, “email”:  “name@ejemplo.com”, “type”: “customer”}
+      - https://localhost:8080/api/users
+   - Response:
+   
+         {“id”: “1”,
+           “username”: “Efrain”, 
+            “password”: “1234AaBb”, 
+            “email”: “name@ejemplo.com”, 
+            “token”: “3434534$$%$%$%d”
+            “type”: “customer”
+            “registration_date”: “11-05-2021 12:01:44 }
+
+
 
 
 
