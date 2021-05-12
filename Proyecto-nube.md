@@ -162,14 +162,14 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - DELETE/users/{id} -> Elimina el usuario con id especifica
 
 ### Campos requeridos
-**POST:** username, password, email, type, registration_date
+**POST:** username, password, email, type
 
 ### Tipo de dato y validaciones:
 - **String username** [varchar(128)] -> NOT NULL
 - **String password** [varchar(128)] -> NOT NULL, caracteres >= 8, contenga dígitos, minúsculas y mayúsculas.
 - **String email** [varchar(175)] -> NOT NULL, perteneciente a RegEx email según w3.org
 - **String type** [enum(‘delivery_man’, ‘salesman’ , ‘customer’)]-> NOT NULL
-- **String registration_date** [date]-> no vacio, dd-mm-yyyy, yyyy>año en curso - 18
+- **String registration_date** [date]-> no vacio, dd-mm-yyyy
 
 ### Ejemplo del Request y Response
 - Crear un usuario (POST)
@@ -204,7 +204,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - **String lastname** [varchar(128)]->  NOT NULL
 - **String cellphone** [varchar(40)]->  not null
 - **Strig sex** [enum('man','woman')] -> NOT NULL
-- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, yyyy>año en curso - 18
+- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, donde yyyy < año en curso - 18
 - **String address** [varchar(175)] -> NOT NULL
 - **Integer city_id** [int(10)] -> NOT NULL
 - **Integer vehicle_id** [int(10)] -> NOT NULL
@@ -247,7 +247,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - DELETE/salesmen/{id} -> Elimina el vendedor con el ud correspondiente
 
 ### Campos requeridos
-**POST:** user_id, firstname, lastname, cellphone, sex, birth_date, addressm city_id
+**POST:** user_id, firstname, lastname, cellphone, sex, birth_date, address, city_id
 
 ### Tipo de dato y validaciones
 - **Integer user_id** [int(10)] -> exista un user con el mismo id
@@ -255,7 +255,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - **String lastname** [varchar(128)]->  NOT NULL
 - **String cellphone** [varchar(40)]->  not null
 - **Strig sex** [enum('man','woman')] -> NOT NULL
-- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, yyyy>año en curso - 18
+- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, donde yyyy < año en curso - 18
 - **String address** [varchar(175)] -> NOT NULL
 - **Integer city_id** [int(10)] -> NOT NULL
 
@@ -304,7 +304,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - **String lastname** [varchar(128)]->  NOT NULL
 - **String cellphone** [varchar(40)]->  not null
 - **Strig sex** [enum('man','woman')] -> NOT NULL
-- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, yyyy>año en curso - 18
+- **String birth_date** [date] -> NOT NULL, dd-mm-yyyy, donde yyyy < año en curso - 18
 - **Integer address_id** [int(10)] -> existe un address con el mismo id
 - **Integer payment_type_id** [int(10)] -> existe un payment con el mismo id
 
@@ -318,7 +318,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “ firstname”: “Efrain”, 
           “lastname”: “ake”, 
           “cellphone”: “9997234556”, 
-          “sex”: “hombre”, 
+          “sex”: “man”, 
           “birth_date”: “12-12-2021”, 
           “address”: “calle 29 merida yucatan”, 
           “payment_type_id”: 1, 
@@ -333,7 +333,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
             “ firstname”: “Efrain”, 
             “lastname”: “ake”, 
             “cellphone”: “9997234556”, 
-            “sex”: “hombre”, 
+            “sex”: “man”, 
             “birth_date”: “12-12-2021”, 
             “address”: “calle 29 merida yucatan”, 
             “payment_type_id”: 1, 
@@ -347,7 +347,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - DELETE/commerces/{id} -> Elimina el comercio con el id correspondiente
 
 ### Campos requeridos
-**POST:** username, password, email, type
+**POST:** salesman_id, commercial_name, rfc, description, phone, address, city_id
 
 ### Tipo de dato y validaciones 
 - **Integer salesman_id** [int(10)] -> exista un salesman con el mismo id
@@ -357,7 +357,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - **String phone** [varchar(175)] -> NOT NULL
 - **String address** [varchar(175)] -> NOT NULL
 - **Integer city_id** [int(10)] -> NOT NULL
-- **String logo** [varchar(100)] -> NOT NULL
+- **String logo** [varchar(100)] -> 
 
 ### Ejemplo del Request y Response
 - Crear un comercio(POST)
@@ -379,14 +379,15 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
    - Response: 
 
             {
-            “user_id”: 1,
-            “ firstname”: “Efrain”, 
-            “lastname”: “ake”, 
-            “cellphone”: “9997234556”, 
-            “sex”: “hombre”, 
-            “birth_date”: “12-12-2021”, 
+            “id”: 1,
+            “salesman_id”: 1,
+            commercial_name”: “coca cola”, 
+            “rfc”: “12144324”, 
+            “description”: “refrescos”, 
+            “phone”: “99765656”, 
             “address”: “calle 29 merida yucatan”, 
-            “payment_type_id”: 1, 
+            “city_id”: 1,
+            “logo”: “https://i.blogs.es/6091fa/java/450_1000.jpg” 
             }
           
 ### Product 
@@ -431,11 +432,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 **POST:** commerce_id, producto_id, description, price, stock
 
 ### Tipo de dato y validaciones 
-- **Integer commerce_id** [int(10)] -> exista un comercio con el mismo id
-- **String description** [[varchar(100)]-> NOT NULL
-- **Double price** [Decimal(10,2)] -> NOT NULL
-- **Integer product_id** [int(10)] -> exista un producto con el mismo id
-- **Integer stock** [int(10)] -> NOT NULL, No mayor a cero 
+- **Integer commerce_id** [int(10)] -> NOT NULL, exista un comercio con el mismo id
+- **String description** [[varchar(100)]-> NOT NULL, no vacio
+- **Double price** [Decimal(10,2)] -> NOT NULL, no vacio
+- **Integer product_id** [int(10)] -> NOT NULL, exista un producto con el mismo id
+- **Integer stock** [int(10)] -> NOT NULL, mayor a cero 
 
 ### Ejemplo del Request y Response
 - Crear un producto de un comercio(POST)
@@ -520,7 +521,7 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
              {
             “id”: 1,
-            “name”: “bicileta”,
+            “name”: “bicicleta”,
             }
 
 ### Address
@@ -531,13 +532,13 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 - DELETE/addresses/{id} -> Elimina la direccion con el id correspondiente
 
 ### Campos requeridos
-**POST:** customer_id, street, crossing, suburb, city_id
+**POST:** customer_id, street,  city_id
 
 ### Tipo de dato y validaciones 
-- **Integer customer_id** [int(10)] -> exista un customer con el mismo id
+- **Integer customer_id** [int(10)] -> NOT NULL, exista un customer con el mismo id
 - **String street** [[varchar(175)]-> NOT NULL
-- **String crossing** [varchar(128)]->  NOT NULL
-- **String suburb** [varchar(128)]->  not null
+- **String crossing** [varchar(128)]->  no vacio
+- **String suburb** [varchar(128)]->  no vacio
 - **Integer city_id** [int(10)] -> NOT NULL
 
 ### Ejemplo del Request y Response
@@ -547,9 +548,8 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
           {
             “customer_id”: 1, 
-           “street”: “calle 12 x 55 y 55”, 
-          “city_id”: 5
- 
+            “street”: “calle 12 x 55 y 55”, 
+            “city_id”: 5
           }
      - https://localhost:8080/api/addresses
 
@@ -574,10 +574,10 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 **POST:** order_id, commerce_product_id, amount
 
 ### Tipo de dato y validaciones 
-- **Integer order_id** [int(10)] -> exista una orden con el mismo id
-- **Integer commerce_product_id** [int(10)] -> exista una commerce_product con el mismo id
+- **Integer order_id** [int(10)] -> NOT NULL, exista una orden con el mismo id
+- **Integer commerce_product_id** [int(10)] -> NOT NULL, exista una commerce_product con el mismo id
 - **Integer amount** [int(10)] > NOT NULL
-- **Double subtotal** [Decimal(10,2)] -> NOT NULL
+- **Double subtotal** [Decimal(10,2)] -> 
 - **Bool finished** [bool] -> por defecto 0
 
 ### Ejemplo del Request y Response
@@ -589,15 +589,17 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
           “order_id”: 1, 
           “commerce_product_id”: 4, 
           “amount”: 2
-
           }
      - https://localhost:8080/api/order_details
 
    - Response: 
 
             {
-            “id": "1",
-            name:"efectivo"
+            “order_id”: 1, 
+            “commerce_product_id”: 4, 
+            “amount”: 2,
+            “subtotal”: 46.00,
+            “finished”: 0
             }
             
 ### Order
@@ -611,14 +613,13 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 **POST:** customer_id
 
 ### Tipo de dato y validaciones 
-- **Integer customer_id** [int(10)] -> exista una customer con el mismo id
+- **Integer customer_id** [int(10)] -> NOT NULL, exista una customer con el mismo id
 - **Integer delivery_man_id** [int(10)] -> exista una repartidor con el mismo id
-- **Integer status_id** [int(10)] -> exista un status con el mismo id
+- **Integer status_id** [int(10)] -> exista un status con el mismo id, por defecto 0 (vacio)
 - **Integer payment_type_id** [int(10)] -> exista un tipo de pago con el mismo id
-- **Double total** [Decimal(10,2)] -> NOT NULL
-- **String order_date** [datetime] -> NOT NULL, dd-mm-yyyy hh:mm:ss, yyyy< año en curso 18
-- **String delivered_date** [datetime] -> NOT NULL, dd-mm-yyyy hh:mm:ss, yyyy< año en curso 18
-
+- **Double total** [Decimal(10,2)] -> se inicualiza en 0
+- **String order_date** [datetime] -> dd-mm-yyyy hh:mm:ss
+- **String delivered_date** [datetime] ->  dd-mm-yyyy hh:mm:ss
 ### Ejemplo del Request y Response
 - Crear una orden(POST)
   - Request
@@ -626,7 +627,6 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
 
           {
           “customer_id": "1"
-
           }
      - https://localhost:8080/api/orders
 
@@ -636,11 +636,11 @@ Todo esto se puede lograr mediante API para responder consultas sobre lugares a 
            “id”: “1”,
           “delivery_man_id”: null,
           “customer_id”: “1”,
-          “status_id”: “1”,
+          “status_id”: 0,
           “order_date”: “11-05-2021 12:00:32”,
           “delivered_Date”: null,
-          “total”: “209”,
-          “payment_type”: “1”,
+          “total”: 0.00,
+          “payment_type”: null,
           }
 
 ### Payment_type
