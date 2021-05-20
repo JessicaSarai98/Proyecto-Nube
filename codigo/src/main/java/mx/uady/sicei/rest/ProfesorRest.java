@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.uady.sicei.model.Alumno;
-import mx.uady.sicei.model.request.AlumnoRequest;
-import mx.uady.sicei.service.AlumnoSerivce;
+import mx.uady.sicei.model.Profesor;
+import mx.uady.sicei.model.request.ProfesorRequest;
 import mx.uady.sicei.service.ProfesorService;
 
 @RestController //Metaprogramacion
@@ -36,7 +35,7 @@ public class ProfesorRest{
     //POST /api/profesores
     @PostMapping("/profesores")
     public ResponseEntity<Profesor> postProfesores(@RequestBody @Valid ProfesorRequest request) throws URISyntaxException{
-        Profesor profesor = profesorService.crearProfesor(request)
+        Profesor profesor = profesorService.crearProfesor(request);
         
         //201 Created 
         //Header: Location

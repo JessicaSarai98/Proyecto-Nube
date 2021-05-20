@@ -47,7 +47,7 @@ public class Profesor{
         this.id=id;
     }
 
-    public Integer getNombre(){
+    public String getNombre(){
         return this.nombre;
     }
 

@@ -12,7 +12,7 @@ import mx.uady.sicei.model.Profesor;
 import mx.uady.sicei.model.request.AlumnoRequest;
 import mx.uady.sicei.model.request.ProfesorRequest;
 import mx.uady.sicei.repository.AlumnoRepository;
-import mx.uady.sicei.repository.profesorRepository;
+import mx.uady.sicei.repository.ProfesorRepository;
 
 @Service
 public class ProfesorService{
@@ -21,7 +21,7 @@ public class ProfesorService{
     //falta tutoria
 
     public List<Profesor> getProfesores(){
-        List<Profesor> profesores = new LinkedList<>():
+        List<Profesor> profesores = new LinkedList<>();
         profesorRepository.findAll().iterator().forEachRemaining(profesores::add); //SELECT(id,nombre)
         return profesores;
     }

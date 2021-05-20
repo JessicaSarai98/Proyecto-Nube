@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import mx.uady.sicei.model.Alumno;
+import mx.uady.sicei.model.Profesor;
 
 @Repository
-public interface profesorRepository extends CrudRepository<Profesor, Integer>{
-    
+public interface ProfesorRepository extends CrudRepository<Profesor, Integer>{
+    List<Profesor> findByNombreContaining(String nombre); // LIKE %nombre%
 }
