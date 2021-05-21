@@ -25,35 +25,32 @@ public class UsuarioService {
 
     @Autowired
     private AlumnoRepository alumnoRepository;
+// PUT, GET, GET by ID, DELETE para entidad Usuario
+
+    @Transactional // Crear una transaccion
+    public Usuario actualizar(Integer id,UsuarioRequest request) {
+
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(()-> new NotFoundException());
+
+        usuario.setId(id);
+        usuario.setUsuario(request.getUsuario());
+        usuario.setPassword(request.getPassword());
+
+        String token = UUID.randomUUID().toString();
+        usuario.setToken(token);
+        
+        usuario = usuarioRepository.save(usuario); 
+        return usuario;
+        
+    }
 
     @Transactional(readOnly = true)
     public List<Usuario> getUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    @Transactional // Crear una transaccion
-    public Usuario crear(UsuarioRequest request) {
-        Usuario usuarioCrear = new Usuario();
 
-        usuarioCrear.setUsuario(request.getUsuario());
-        usuarioCrear.setPassword(request.getPassword());
-
-        String token = UUID.randomUUID().toString();
-        usuarioCrear.setToken(token);
-
-        Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear);
-        
-        Alumno alumno = new Alumno();
-
-        alumno.setNombre(request.getNombre());
-        alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
-
-        alumno = alumnoRepository.save(alumno);
-
-        return usuarioGuardado;
-    }
-
-    public Usuario getUsuario(Integer id) {
+    public Usuario getById(Integer id) {
 
         Optional<Usuario> opt = usuarioRepository.findById(id);
 
@@ -63,5 +60,33 @@ public class UsuarioService {
 
         throw new NotFoundException();
     }
+    public void delete(Integer id) {
+        usuarioRepository.deleteById(id);
+    }
+
+
+    // @Transactional // Crear una transaccion
+    // public Usuario crear(UsuarioRequest request) {
+    //     Usuario usuarioCrear = new Usuario();
+
+    //     usuarioCrear.setUsuario(request.getUsuario());
+    //     usuarioCrear.setPassword(request.getPassword());
+
+    //     String token = UUID.randomUUID().toString();
+    //     usuarioCrear.setToken(token);
+
+    //     Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear);
+        
+    //     Alumno alumno = new Alumno();
+
+    //     // alumno.setNombre(request.getNombre());
+    //     alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
+
+    //     alumno = alumnoRepository.save(alumno);
+
+    //     return usuarioGuardado;
+    // }
+
+    
 
 }

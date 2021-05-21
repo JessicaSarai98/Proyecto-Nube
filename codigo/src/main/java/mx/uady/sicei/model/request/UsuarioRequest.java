@@ -11,10 +11,10 @@ public class UsuarioRequest {
     @NotEmpty
     private String usuario;
 
-    @NotNull
-    @Size(min = 1, max = 255)
-    @NotEmpty
-    private String nombre;
+    // @NotNull
+    // @Size(min = 1, max = 255)
+    // @NotEmpty
+    // private String nombre;
 
     @NotNull
     @Size(min = 5, max = 50)
@@ -41,11 +41,11 @@ public class UsuarioRequest {
         return usuario;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
+    // public String getNombre() {
+    //     return nombre;
+    // }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    // public void setNombre(String nombre) {
+    //     this.nombre = nombre;
+    // }
 }
