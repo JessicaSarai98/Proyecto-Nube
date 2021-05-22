@@ -49,10 +49,10 @@ public class AlumnoRest {
         return ResponseEntity.status(HttpStatus.OK).body(u);
     }
 
-    @GetMapping("/alumnos/buscar") // RequestParam = Query parameter -> ?llave=valor&llave=valor
-    public ResponseEntity<List<Alumno>> searchAlumnos(@RequestParam("nombre") String nombre)  {
-        return ResponseEntity.ok().body(alumnoService.buscarAlumnos(nombre));
-    }
+    // @GetMapping("/alumnos/buscar") // RequestParam = Query parameter -> ?llave=valor&llave=valor
+    // public ResponseEntity<List<Alumno>> searchAlumnos(@RequestParam("nombre") String nombre)  {
+    //     return ResponseEntity.ok().body(alumnoService.buscarAlumnos(nombre));
+    // }
 
     // POST /api/alumnos
     @PostMapping("/alumnos")
