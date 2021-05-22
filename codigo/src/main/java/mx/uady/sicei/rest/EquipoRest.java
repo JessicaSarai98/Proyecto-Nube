@@ -7,7 +7,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,25 +56,17 @@ public class EquipoRest {
 
 
 
-    // @GetMapping("/usuarios/{id}")
-    // public ResponseEntity<Usuario> getUsuario(@PathVariable Integer id) {
-    //     Usuario u = usuarioService.getUsuario(id);
-    //     return ResponseEntity.status(HttpStatus.OK).body(u);
-    // }
-    
-
-     // // Path Paramater
-//   @PutMapping("/profesores/{noEmpleado}") // PUT /alumnos/1001930
-//   public ResponseEntity<Profesor> editarProfesor(@PathVariable String noEmpleado, @Valid  @RequestBody Profesor profesor) {
-//       Profesor profesorEditado = profesorService.editarProfesor(noEmpleado, profesor);
-//       return ResponseEntity.ok().body(profesorEditado);
-//   }
+    @GetMapping("/equipos/{id}")
+    public ResponseEntity<Equipo> buscarEquipoPorId(@PathVariable Integer id) {
+        Equipo equipo = equipoService.buscarEquipoPorId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(equipo);
+    }
 
 
 //     // // // Path Paramater
-//   @DeleteMapping("/profesores/{noEmpleado}") // DELETE /alumnos/1001930
-//   public ResponseEntity<Void> eliminarProfesor(@PathVariable String noEmpleado) {
-//       profesorService.eliminarProfesor(noEmpleado);
-//       return ResponseEntity.ok().build();
-//   }
+    @DeleteMapping("/equipos/{id}") // DELETE /alumnos/1001930
+    public ResponseEntity<Void> eliminarProfesor(@PathVariable Integer id) {
+        equipoService.eliminarEquipo(id);
+        return ResponseEntity.ok().build();
+    }
 }

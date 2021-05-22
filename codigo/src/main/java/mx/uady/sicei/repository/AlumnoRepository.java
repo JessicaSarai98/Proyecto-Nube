@@ -1,11 +1,16 @@
 package mx.uady.sicei.repository;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import mx.uady.sicei.model.Alumno;
+import mx.uady.sicei.model.Equipo;
+
 
 @Repository
 public interface AlumnoRepository extends CrudRepository<Alumno, Integer> {
@@ -15,4 +20,5 @@ public interface AlumnoRepository extends CrudRepository<Alumno, Integer> {
     // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods
 
     List<Alumno> findByNombreContaining(String nombre); // LIKE %nombre%
+    List<Alumno> findByEquipo(Equipo equipo);
 }
