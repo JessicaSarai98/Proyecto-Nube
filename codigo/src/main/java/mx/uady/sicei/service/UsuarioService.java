@@ -49,7 +49,7 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-
+    @Transactional(readOnly = true)
     public Usuario getById(Integer id) {
 
         Optional<Usuario> opt = usuarioRepository.findById(id);
@@ -58,6 +58,7 @@ public class UsuarioService {
         }
         throw new NotFoundException();
     }
+    @Transactional()
     public void delete(Integer id) {
         try {
             usuarioRepository.deleteById(id);                        
@@ -65,29 +66,5 @@ public class UsuarioService {
         
     }
 
-
-    // @Transactional // Crear una transaccion
-    // public Usuario crear(UsuarioRequest request) {
-    //     Usuario usuarioCrear = new Usuario();
-
-    //     usuarioCrear.setUsuario(request.getUsuario());
-    //     usuarioCrear.setPassword(request.getPassword());
-
-    //     String token = UUID.randomUUID().toString();
-    //     usuarioCrear.setToken(token);
-
-    //     Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear);
-        
-    //     Alumno alumno = new Alumno();
-
-    //     // alumno.setNombre(request.getNombre());
-    //     alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
-
-    //     alumno = alumnoRepository.save(alumno);
-
-    //     return usuarioGuardado;
-    // }
-
-    
-
+ 
 }

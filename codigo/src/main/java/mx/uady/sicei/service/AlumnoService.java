@@ -102,26 +102,30 @@ public class AlumnoService {
         alumno = alumnoRepository.save(alumno); 
         return alumno;
     }
-
+    @Transactional(readOnly = true)
     public List<Alumno> getAlumnos() {
         List<Alumno> alumnos = new LinkedList<>();
         alumnoRepository.findAll().iterator().forEachRemaining(alumnos::add); // SELECT(id, nombre)
         return alumnos;
         // return alumnoRepository.findAll();
     }
+    // @Transactional()
 
-    public List<Alumno> buscarAlumnos(String nombre) {
-        return alumnoRepository.findByNombreContaining(nombre);
-    }
-
+    // public List<Alumno> buscarAlumnos(String nombre) {
+    //     return alumnoRepository.findByNombreContaining(nombre);
+    // }
+    @Transactional(readOnly = true)
     public Alumno getById(Integer id) {
         Alumno alumno = alumnoRepository.findById(id).orElseThrow(()-> new NotFoundException());
         return alumno;
     }
-
+    @Transactional()
     public void delete(Integer id) {
         Optional<Alumno> alumno = alumnoRepository.findById(id);
         if (alumno.isPresent()){
+            //Verificar conecciones con tutorias y equipo 
+
+            //
             alumnoRepository.deleteById(id);
             usuarioRepository.deleteById(alumno.get().getUsuario().getId());                            
         }
