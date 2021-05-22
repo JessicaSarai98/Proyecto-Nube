@@ -59,7 +59,10 @@ public class UsuarioService {
         throw new NotFoundException();
     }
     public void delete(Integer id) {
-        usuarioRepository.deleteById(id);
+        try {
+            usuarioRepository.deleteById(id);                        
+        } catch (Exception e) {}
+        
     }
 
 

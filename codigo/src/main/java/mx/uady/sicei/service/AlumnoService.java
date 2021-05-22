@@ -1,15 +1,20 @@
 package mx.uady.sicei.service;
 
+import java.net.Socket;
 import java.util.LinkedList;
-import java.util.List; 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
+
+// import jdk.nashorn.internal.ir.Request;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import mx.uady.sicei.exception.NotFoundException;
+import mx.uady.sicei.exception.*;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.model.Equipo;
@@ -36,12 +41,6 @@ public class AlumnoService {
 
     @Transactional // Crear una transaccion
     public Alumno crearAlumno(AlumnoRequest request) {
-
-        // System.out.println(request.getEquipo());
-        // if(request.getEquipo() instanceof Integer)
-        //     System.out.println("si es un integer");
-        
-
         Usuario usuarioCrear = new Usuario();
 
         usuarioCrear.setUsuario(request.getUsuario());
@@ -55,36 +54,51 @@ public class AlumnoService {
         Alumno alumno = new Alumno();
         alumno.setNombre(request.getNombre());
         if (request.getEquipo()!=null && request.getEquipo()>0){
-            Equipo equipo = equipoRepository.findById(request.getEquipo()).orElseThrow(()-> new NotFoundException());
-            // System.out.println(equipo.toString());
+            Equipo equipo = equipoRepository.findById(request.getEquipo()).orElseThrow(()-> new BadRequestException("El valor del equipo no existe"));
             alumno.setEquipo(equipo);
         }
-        // System.out.println("no entra ");
+
+        if (request.getLicenciatura()!=null && request.getLicenciatura()!=""){
+            try {          
+                Licenciatura lic= Licenciatura.valueOf(request.getLicenciatura());
+                alumno.setLicenciatura(lic);
+             } catch (IllegalArgumentException e) {                   
+                throw new BadRequestException(
+                  "Invalid value for Licenciatura " + ": " + request.getLicenciatura());
+             }
+        }
         alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
         alumno = alumnoRepository.save(alumno);
-        // return usuarioGuardado;
         return alumno;
     }
 
     @Transactional // Crear una transaccion
     public Alumno actualizarAlumno(Integer id,AlumnoRequest request) {
-
+        // System.out.println(id);
+        // System.out.println(request);
         Alumno alumno = alumnoRepository.findById(id).orElseThrow(()-> new NotFoundException());
-
-        // usuario.setId(id);
-        alumno.setNombre(request.getNombre());
-        if (request.getEquipo()!=null && request.getEquipo()!=0){
-            Equipo equipo = equipoRepository.findById(request.getEquipo()).orElseThrow(()-> new NotFoundException());
+        // System.out.println(alumno.toString());
+        if (request.getNombre()!=null && request.getNombre().trim()!="" ){
+            alumno.setNombre(request.getNombre());
+        }
+        if (request.getEquipo()==null ){
+            alumno.setEquipo(null);
+        }else
+        {
+            Equipo equipo = equipoRepository.findById(request.getEquipo()).orElseThrow(()-> new BadRequestException("El valor del equipo no existe"));
             alumno.setEquipo(equipo);
         }
-        // if (request.getEquipo()!=null){
-        //     Equipo equipo = equipoRepository.findById(request.getEquipo()).orElseThrow(()-> new NotFoundException());
-        //     alumno.setEquipo(equipo);
-        // }
-
-        // String token = UUID.randomUUID().toString();
-        // usuario.setToken(token);
-        
+        if (request.getLicenciatura()==null ){
+            alumno.setLicenciatura(null);
+        }else{
+            try {          
+                Licenciatura lic= Licenciatura.valueOf(request.getLicenciatura());
+                alumno.setLicenciatura(lic);
+             } catch (IllegalArgumentException e) {                   
+                throw new BadRequestException("Invalid value for Licenciatura " + ": " + request.getLicenciatura());
+             }
+        }
+        // System.out.println(alumno);
         alumno = alumnoRepository.save(alumno); 
         return alumno;
     }
@@ -100,29 +114,18 @@ public class AlumnoService {
         return alumnoRepository.findByNombreContaining(nombre);
     }
 
+    public Alumno getById(Integer id) {
+        Alumno alumno = alumnoRepository.findById(id).orElseThrow(()-> new NotFoundException());
+        return alumno;
+    }
 
-    
-// @Transactional // Crear una transaccion
-    // public Usuario crear(UsuarioRequest request) {
-    //     Usuario usuarioCrear = new Usuario();
+    public void delete(Integer id) {
+        Optional<Alumno> alumno = alumnoRepository.findById(id);
+        if (alumno.isPresent()){
+            alumnoRepository.deleteById(id);
+            usuarioRepository.deleteById(alumno.get().getUsuario().getId());                            
+        }
+     }
 
-    //     usuarioCrear.setUsuario(request.getUsuario());
-    //     usuarioCrear.setPassword(request.getPassword());
-
-    //     String token = UUID.randomUUID().toString();
-    //     usuarioCrear.setToken(token);
-
-    //     Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear);
-        
-    //     Alumno alumno = new Alumno();
-
-    //     // alumno.setNombre(request.getNombre());
-    //     alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
-
-    //     alumno = alumnoRepository.save(alumno);
-
-    //     return usuarioGuardado;
-    // }
-
-
+ 
 }
