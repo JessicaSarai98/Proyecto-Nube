@@ -53,11 +53,9 @@ public class UsuarioService {
     public Usuario getById(Integer id) {
 
         Optional<Usuario> opt = usuarioRepository.findById(id);
-
         if (opt.isPresent()) {
             return opt.get();
         }
-
         throw new NotFoundException();
     }
     public void delete(Integer id) {

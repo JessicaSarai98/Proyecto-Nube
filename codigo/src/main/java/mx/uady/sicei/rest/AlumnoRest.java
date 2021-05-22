@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.request.AlumnoRequest;
-import mx.uady.sicei.service.AlumnoSerivce;
+import mx.uady.sicei.service.AlumnoService;
 
 @RestController // Metaprogramacion
 @RequestMapping("/api")
 public class AlumnoRest {
 
     @Autowired
-    private AlumnoSerivce alumnoService;
-
+    private AlumnoService alumnoService;
+    // POST, PUT, GET, GET by ID, DELETE para entidad Alumno
     // GET /api/alumnos
     @GetMapping("/alumnos")
     public ResponseEntity<List<Alumno>> getAlumnos() {
