@@ -9,9 +9,9 @@ import mx.uady.sicei.model.TutoriaLlave;
 
 @Repository
 public interface TutoriaRepository extends JpaRepository<Tutoria, TutoriaLlave>{
-    List<Tutoria> findByIdAlumno(Integer idalumno);
-    List<Tutoria> findByIdProfesor(Integer idprofesor);
+    List<Tutoria> findByAlumno(Integer idalumno);
+    List<Tutoria> findByProfesor(Integer idprofesor);
 
-    public Tutoria findByTutoria(Integer Tutoria);
+    // public Tutoria findByTutoria(Integer Tutoria);
 }
 
