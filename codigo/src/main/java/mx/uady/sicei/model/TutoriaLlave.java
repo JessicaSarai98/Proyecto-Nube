@@ -6,10 +6,10 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class TutoriaLlave implements Serializable{
-    @Column(name="idalumno", insertable=false, updatable=false)
+    @Column(name="id_alumno", insertable=false, updatable=false)
     private Integer idalumno; 
 
-    @Column(name="idprofesor",insertable=false, updatable=false)
+    @Column(name="id_profesor",insertable=false, updatable=false)
     private Integer idprofesor;
 
     public Integer getIdAlumno(){
