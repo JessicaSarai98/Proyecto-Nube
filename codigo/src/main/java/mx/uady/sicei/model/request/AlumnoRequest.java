@@ -4,9 +4,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import mx.uady.sicei.model.Licenciatura;
-import mx.uady.sicei.model.Equipo;
-
 public class AlumnoRequest {
 
     @NotNull

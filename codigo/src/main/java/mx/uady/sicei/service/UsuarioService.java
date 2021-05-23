@@ -9,12 +9,10 @@ import java.util.UUID;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import mx.uady.sicei.exception.NotFoundException;
-import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.model.request.UsuarioRequest;
-import mx.uady.sicei.repository.AlumnoRepository;
+
 import mx.uady.sicei.repository.UsuarioRepository;
 
 @Service
@@ -23,8 +21,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private AlumnoRepository alumnoRepository;
+    //@Autowired
+    //private AlumnoRepository alumnoRepository;
 // PUT, GET, GET by ID, DELETE para entidad Usuario
 
     @Transactional // Crear una transaccion

@@ -3,9 +3,7 @@ package mx.uady.sicei.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +28,7 @@ public class EquipoRest {
     private EquipoService equipoService;
 
     @GetMapping("/equipos")
-    public ResponseEntity<List<Equipo>> obtenerUsuario() {
+    public ResponseEntity<List<Equipo>> obtenerEquipos() {
         List<Equipo> equipos = equipoService.getEquipos();
         return ResponseEntity.ok(equipos);
     }
@@ -65,7 +63,7 @@ public class EquipoRest {
 
 //     // // // Path Paramater
     @DeleteMapping("/equipos/{id}") // DELETE /alumnos/1001930
-    public ResponseEntity<Void> eliminarProfesor(@PathVariable Integer id) {
+    public ResponseEntity<Void> eliminarEquipo(@PathVariable Integer id) {
         equipoService.eliminarEquipo(id);
         return ResponseEntity.ok().build();
     }

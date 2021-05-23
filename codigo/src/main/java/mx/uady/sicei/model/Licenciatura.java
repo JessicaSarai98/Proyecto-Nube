@@ -1,9 +1,9 @@
 package mx.uady.sicei.model;
 
 public enum Licenciatura {
-    LIS,
     LCC,
     LIC,
+    LIS,
     LA,
     LM
 }

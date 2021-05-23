@@ -7,5 +7,5 @@ import mx.uady.sicei.model.Equipo;
 
 @Repository
 public interface EquipoRepository extends CrudRepository<Equipo, Integer> {
-
+    
 }

@@ -1,10 +1,7 @@
 package mx.uady.sicei.model.request;
-
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import mx.uady.sicei.model.Licenciatura;
+import javax.validation.constraints.Size;
 
 public class ProfesorRequest{
     @NotEmpty
@@ -12,9 +9,7 @@ public class ProfesorRequest{
     private String nombre;
 
     private Integer horas;
-    public ProfesorRequest(){
-
-    }
+    public ProfesorRequest(){}
 
     public ProfesorRequest(String nombre, Integer horas){
         this.nombre= nombre;

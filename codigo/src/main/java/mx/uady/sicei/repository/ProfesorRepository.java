@@ -10,4 +10,6 @@ import mx.uady.sicei.model.Profesor;
 @Repository
 public interface ProfesorRepository extends CrudRepository<Profesor, Integer>{
     List<Profesor> findByNombreContaining(String nombre); // LIKE %nombre%
+    List<Profesor> findByProfesor(Profesor profesor);
+    List<Profesor> findByNombre(Profesor profesor);
 }

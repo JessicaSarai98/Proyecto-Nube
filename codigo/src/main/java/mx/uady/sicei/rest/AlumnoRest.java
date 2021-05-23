@@ -3,9 +3,7 @@ package mx.uady.sicei.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.request.AlumnoRequest;
 import mx.uady.sicei.service.AlumnoService;
@@ -54,8 +49,8 @@ public class AlumnoRest {
     //     return ResponseEntity.ok().body(alumnoService.buscarAlumnos(nombre));
     // }
 
-    // POST /api/alumnos
-    @PostMapping("/alumnos")
+    // POST /api/newAlumno
+    @PostMapping("/newAlumno")
     public ResponseEntity<Alumno> postAlumnos(@RequestBody @Valid AlumnoRequest request) throws URISyntaxException {
         
         // RequestBody le indica a Java que estamos esperando un request que cumpla con los campos del Objeto AlumnoRequest
