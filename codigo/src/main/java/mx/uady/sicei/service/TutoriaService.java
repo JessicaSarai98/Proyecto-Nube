@@ -2,6 +2,7 @@ package mx.uady.sicei.service;
 
 import java.util.LinkedList;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import mx.uady.sicei.exception.NotFoundException;
@@ -13,7 +14,7 @@ import mx.uady.sicei.repository.TutoriaRepository;
 import mx.uady.sicei.repository.AlumnoRepository;
 import mx.uady.sicei.repository.ProfesorRepository;
 import mx.uady.sicei.model.request.TutoriaRequest;
-
+@Transactional
 @Service
 public class TutoriaService{
     @Autowired

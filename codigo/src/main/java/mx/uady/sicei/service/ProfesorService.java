@@ -2,20 +2,24 @@ package mx.uady.sicei.service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import mx.uady.sicei.model.Profesor;
+import mx.uady.sicei.model.Tutoria;
 import mx.uady.sicei.model.request.ProfesorRequest;
 import mx.uady.sicei.repository.ProfesorRepository;
-
-import mx.uady.sicei.exception.NotFoundException;
-
+import mx.uady.sicei.repository.TutoriaRepository;
+import mx.uady.sicei.exception.*; 
+@Transactional
 @Service
 public class ProfesorService{
     @Autowired
     private ProfesorRepository profesorRepository;
-    //falta tutoria
+    @Autowired
+    private TutoriaRepository tutoriaRepository;
 
     public List<Profesor> getProfesores(){
         List<Profesor> profesores = new LinkedList<>();
@@ -49,11 +53,24 @@ public class ProfesorService{
     }
 
     public void borrarProfesor(Integer id){
-        List<Profesor> profesores = new LinkedList<>();
-        profesorRepository.findAll().iterator().forEachRemaining(profesores::add);
-        if(profesores.size()<id|| id <=0){
-            throw new NotFoundException("El profesor no pudo ser encontrado");
+
+        Optional<Profesor> profesor = profesorRepository.findById(id);
+        if (profesor.isPresent()){
+            //Verificar conecciones con tutorias  
+            System.out.println(profesor.get());
+            List<Tutoria> tutoria = tutoriaRepository.findByProfesor(profesor.get());
+            System.out.println(tutoria);
+
+            if (tutoria.size() > 0)
+                throw new BadRequestException("El profesor esta enlazado con una tutoria");
+
+            profesorRepository.deleteById(id);
         }
+
+
+
+
+
 
         
     }

@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 //import javax.transaction.Transactional;
+import java.util.LinkedList;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,9 @@ public class UsuarioService {
 
     @Transactional(readOnly = true)
     public List<Usuario> getUsuarios() {
-        return usuarioRepository.findAll();
+        List<Usuario> usuarios = new LinkedList<>();
+        usuarioRepository.findAll().iterator().forEachRemaining(usuarios::add);
+        return usuarios;
     }
 
     @Transactional(readOnly = true)
