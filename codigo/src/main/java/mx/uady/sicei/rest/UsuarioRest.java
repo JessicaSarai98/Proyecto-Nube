@@ -47,7 +47,8 @@ public class UsuarioRest {
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();
     }
-    // @PostMapping("/usuarios")
+
+    // @PostMapping("/register")
     // public ResponseEntity<Usuario> registrarUsuario(@RequestBody UsuarioRequest request) {
     //     Usuario u = usuarioService.crear(request);
     //     return ResponseEntity.status(HttpStatus.CREATED).body(u);
