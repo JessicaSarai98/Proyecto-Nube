@@ -19,11 +19,14 @@ import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.request.AlumnoRequest;
 import mx.uady.sicei.model.request.UsuarioRequest;
 import mx.uady.sicei.service.AlumnoService;
+import mx.uady.sicei.service.AuthService;
 
 @RestController // Metaprogramacion
 // @RequestMapping("/api")
 public class AuthRest {
 
+    @Autowired
+    private AuthService authService;
 
     @PostMapping("/register")
     public ResponseEntity<Alumno> postRegister(@RequestBody @Valid AlumnoRequest request) throws URISyntaxException {
@@ -38,8 +41,15 @@ public class AuthRest {
 
     @PostMapping("/login")
     public ResponseEntity<String> postLogin(@RequestBody  @Valid UsuarioRequest request) throws URISyntaxException {
-        String token = AuthService.login(request);
+        String token = authService.login(request);
         return ResponseEntity.ok(token); 
 
     }
+
+    @PostMapping("/logout/{id}")
+    public ResponseEntity<Void> postLogout(@PathVariable Integer id ) throws URISyntaxException {
+        authService.logout(id);
+       return ResponseEntity.noContent().build();
+    }
+
 }

@@ -19,7 +19,7 @@ public class UsuarioRequest {
     @NotNull
     @Size(min = 5, max = 50)
     @NotEmpty
-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}",message="La contraseña debe mayor de 8 caracteres y contener letras, numeros y al menos 1 caracter especial.")      
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}",message="La contraseña debe mayor de 8 caracteres y contener letras, numeros y al menos 1 caracter especial.")      
     private String password;
 
     public UsuarioRequest() {

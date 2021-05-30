@@ -79,24 +79,15 @@ public class AuthService {
         return alumno;
     }
  
-
-    // public String createToken(String username){
-    //     Claims claims = Jwts.claims().setSubject(username);
-    //     claims.put("Auth", username);
-    //     Date now = new Date();
-    //     return Jwts.builder()
-    //                 .setClaims(claims)
-    //                 .setIssuedAt(now)
-    //                 .setExpiration(new Date(now.getTime()+ JWT_TOKEN_VALIDITY))
-    //                 .signWith(SignatureAlgorithm.HS256, secretKey).compact();
-
-    // }
  
     @Transactional // Crear una transaccion
     public String login(UsuarioRequest request) {
 
-        Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario()).orElseThrow(()-> new NotFoundException());
-        
+        Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario());
+        // Optional<Usuario> usuario = usuarioRepository.findByUsuario(request.getUsuario());
+        if (usuario==null){
+            throw new NotFoundException();
+        }
         // usuario.setPassword(request.getPassword());
 
         if(!usuario.getPassword().equals(request.getPassword())){
@@ -110,4 +101,20 @@ public class AuthService {
         return token;
         
     }
+
+
+    @Transactional // Crear una transaccion
+    public void logout(Integer id) {
+
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(()-> new NotFoundException());
+        
+        usuario.setToken(null);
+        usuarioRepository.save(usuario); 
+        
+    }
+
+
+
+
+
 }
