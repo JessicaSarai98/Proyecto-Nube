@@ -3,7 +3,7 @@ package mx.uady.sicei.model.request;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import javax.validation.constraints.Pattern;
 public class UsuarioRequest {
 
     @NotNull
@@ -19,6 +19,7 @@ public class UsuarioRequest {
     @NotNull
     @Size(min = 5, max = 50)
     @NotEmpty
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.[A-Z])(?=.[@#$%^&+=])(?=\\S+$).{8,}",message="La contraseña debe mayor de 8 caracteres y contener letras, numeros y al menos 1 caracter especial.")      
     private String password;
 
     public UsuarioRequest() {

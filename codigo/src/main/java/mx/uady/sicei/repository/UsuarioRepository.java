@@ -11,4 +11,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     // SELECT * FROM usuarios where token = 'token';
     public Usuario findByToken(String token);
+    // public Usuario findByUsuarioContaining(String nombre); // LIKE %nombre%
+
 }

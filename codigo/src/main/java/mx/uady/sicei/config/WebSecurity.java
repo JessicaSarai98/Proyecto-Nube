@@ -6,9 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -16,20 +14,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private TokenFilter tokenFilter;
-
-    @Autowired
-    private JwtTokenProvider tokenProvider;
-
-    @Bean 
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    } 
-
-    @Bean
-    @Override
-    public AuthenticationManager AuthenticationManagerBean() throws Exception(){
-        return super.authenticationManagerBean();
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,7 +23,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .httpBasic().disable() // Authorization: Basic base64(usuario:contrasena) x.x
             .authorizeRequests()
-                .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/login", "/register","/logout").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
