@@ -1,23 +1,17 @@
 package mx.uady.sicei.service;
 
-import java.net.Socket;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+
 import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
 
-// import jdk.nashorn.internal.ir.Request;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import mx.uady.sicei.exception.*;
-import mx.uady.sicei.config.WebSecurity.PasswordEncoder;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.model.Equipo;
