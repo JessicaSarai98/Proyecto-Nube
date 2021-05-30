@@ -29,5 +29,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
        
     }
+    
+    @Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

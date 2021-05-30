@@ -29,9 +29,9 @@ public class AuthRest {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<Alumno> postRegister(@RequestBody @Valid AlumnoRequest request) throws URISyntaxException {
+    public ResponseEntity<Alumno> postRegister(@RequestBody @Valid AlumnoRequest request,@Valid UsuarioRequest request2) throws URISyntaxException {
    
-        Alumno alumno = authService.registrarAlumno(request);
+        Alumno alumno = authService.registrarAlumno(request,request2);
  
         return ResponseEntity
             .created(new URI("/alumnos/" + alumno.getId()))

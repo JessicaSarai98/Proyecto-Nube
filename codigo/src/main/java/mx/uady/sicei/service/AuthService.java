@@ -11,12 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
 
 // import jdk.nashorn.internal.ir.Request;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import mx.uady.sicei.exception.*;
+import mx.uady.sicei.config.WebSecurity.PasswordEncoder;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.model.Equipo;
@@ -31,7 +32,7 @@ import mx.uady.sicei.repository.TutoriaRepository;
 
 @Service
 public class AuthService {
-    private String password="1234asbd";
+    // private String password="1234asbd";
 
     @Autowired
     private AlumnoRepository alumnoRepository;
@@ -45,14 +46,16 @@ public class AuthService {
     @Autowired
     private TutoriaRepository tutoriaRepository;
     // POST, PUT, GET, GET by ID, DELETE para entidad Alumno
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Transactional // Crear una transaccion
-    public Alumno registrarAlumno(AlumnoRequest request) {
+    public Alumno registrarAlumno(AlumnoRequest request, UsuarioRequest request2) {
         Usuario usuarioCrear = new Usuario();
 
         usuarioCrear.setUsuario(request.getUsuario());
-        usuarioCrear.setPassword(this.password);
-    
+        usuarioCrear.setPassword(passwordEncoder.encode(request2.getPassword()));
+        // user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
         String token = UUID.randomUUID().toString();
         usuarioCrear.setToken(token);
     
