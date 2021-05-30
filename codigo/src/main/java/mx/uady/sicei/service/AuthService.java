@@ -19,6 +19,7 @@ import mx.uady.sicei.model.Licenciatura;
 import mx.uady.sicei.model.Tutoria;
 import mx.uady.sicei.model.request.AlumnoRequest;
 import mx.uady.sicei.model.request.UsuarioRequest;
+import mx.uady.sicei.model.request.AuthRequest;
 import mx.uady.sicei.repository.AlumnoRepository;
 import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.repository.EquipoRepository;
@@ -44,11 +45,11 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional // Crear una transaccion
-    public Alumno registrarAlumno(AlumnoRequest request, UsuarioRequest request2) {
+    public Alumno registrarAlumno(AuthRequest request) {
         Usuario usuarioCrear = new Usuario();
 
         usuarioCrear.setUsuario(request.getUsuario());
-        usuarioCrear.setPassword(passwordEncoder.encode(request2.getPassword()));
+        usuarioCrear.setPassword(passwordEncoder.encode(request.getPassword()));
         // user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
         String token = UUID.randomUUID().toString();
         usuarioCrear.setToken(token);
@@ -87,7 +88,7 @@ public class AuthService {
         }
         // usuario.setPassword(request.getPassword());
 
-        if(!usuario.getPassword().equals(request.getPassword())){
+        if(!passwordEncoder.matches(request.getPassword(), usuario.getPassword())){
             throw new NotFoundException();
         }
 

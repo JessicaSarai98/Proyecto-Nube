@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.request.AlumnoRequest;
 import mx.uady.sicei.model.request.UsuarioRequest;
+import mx.uady.sicei.model.request.AuthRequest;
 import mx.uady.sicei.service.AlumnoService;
 import mx.uady.sicei.service.AuthService;
 
@@ -29,9 +30,9 @@ public class AuthRest {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<Alumno> postRegister(@RequestBody @Valid AlumnoRequest request,@Valid UsuarioRequest request2) throws URISyntaxException {
+    public ResponseEntity<Alumno> postRegister(@RequestBody @Valid AuthRequest request) throws URISyntaxException {
    
-        Alumno alumno = authService.registrarAlumno(request,request2);
+        Alumno alumno = authService.registrarAlumno(request);
  
         return ResponseEntity
             .created(new URI("/alumnos/" + alumno.getId()))
