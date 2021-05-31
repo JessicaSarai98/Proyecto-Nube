@@ -26,11 +26,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .httpBasic().disable() // Authorization: Basic base64(usuario:contrasena) x.x
             .authorizeRequests()
-                .antMatchers("/login", "/register","/logout/**").permitAll()
+                .antMatchers("/login", "/register").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
-       
+    //    System.out.println(tokenFilter);
     }
     
     @Bean

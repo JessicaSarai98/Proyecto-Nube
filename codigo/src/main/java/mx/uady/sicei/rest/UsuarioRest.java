@@ -49,11 +49,11 @@ public class UsuarioRest {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/quienSoy")
-    public ResponseEntity<Usuario> getLoggedUser(){
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResponseEntity.ok(usuario); 
-    }
+    // @GetMapping("/quienSoy")
+    // public ResponseEntity<Usuario> getLoggedUser(){
+    //     Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    //     return ResponseEntity.ok(usuario); 
+    // }
 
     // @PostMapping("/register")
     // public ResponseEntity<Usuario> registrarUsuario(@RequestBody UsuarioRequest request) {

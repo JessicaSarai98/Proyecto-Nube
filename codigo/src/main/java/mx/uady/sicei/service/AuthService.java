@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
 
-
+import jdk.nashorn.internal.runtime.regexp.joni.ast.AnyCharNode;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,23 +46,24 @@ public class AuthService {
 
     @Transactional // Crear una transaccion
     public Alumno registrarAlumno(AuthRequest request) {
-        Usuario usuarioCrear = new Usuario();
+        
+        Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario());
+        if (usuario!=null){
+            throw new BadRequestException("El valor del campo usuario no esta disponible");
+        }
 
+        Usuario usuarioCrear = new Usuario();
         usuarioCrear.setUsuario(request.getUsuario());
         usuarioCrear.setPassword(passwordEncoder.encode(request.getPassword()));
-        // user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
         String token = UUID.randomUUID().toString();
         usuarioCrear.setToken(token);
-    
-        Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear);
-            
+        Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear); 
         Alumno alumno = new Alumno();
         alumno.setNombre(request.getNombre());
         if (request.getEquipo()!=null && request.getEquipo()>0){
             Equipo equipo = equipoRepository.findById(request.getEquipo()).orElseThrow(()-> new BadRequestException("El valor del equipo no existe"));
             alumno.setEquipo(equipo);
         }
-
         if (request.getLicenciatura()!=null && request.getLicenciatura()!=""){
             try {          
                 Licenciatura lic= Licenciatura.valueOf(request.getLicenciatura());
@@ -80,39 +81,31 @@ public class AuthService {
  
     @Transactional // Crear una transaccion
     public String login(UsuarioRequest request) {
-
         Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario());
-        // Optional<Usuario> usuario = usuarioRepository.findByUsuario(request.getUsuario());
         if (usuario==null){
             throw new NotFoundException();
         }
-        // usuario.setPassword(request.getPassword());
-
         if(!passwordEncoder.matches(request.getPassword(), usuario.getPassword())){
-            throw new NotFoundException();
+            throw new BadRequestException();
         }
-
         String token = UUID.randomUUID().toString();
         usuario.setToken(token);
-        
         usuario = usuarioRepository.save(usuario); 
         return token;
-        
     }
 
 
     @Transactional // Crear una transaccion
     public void logout(Integer id) {
-
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(()-> new NotFoundException());
-        
         usuario.setToken(null);
         usuarioRepository.save(usuario); 
-        
     }
 
-
-
-
-
+    @Transactional
+    public void logout2(Usuario user) {
+        user.setToken(null);
+        usuarioRepository.save(user); 
+    }
+     
 }
