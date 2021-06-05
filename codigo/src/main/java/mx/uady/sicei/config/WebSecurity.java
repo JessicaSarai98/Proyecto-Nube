@@ -13,7 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-
+import org.springframework.security.core.userdetails.UserDetailsService;
 import mx.uady.sicei.service.UsuarioService;
 import mx.uady.sicei.config.JwtRequestFilter;
 import mx.uady.sicei.service.UsuarioService;
@@ -26,9 +26,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-
     @Autowired
-    private UsuarioService jwtUserDetailsService;
+	private UserDetailsService jwtUserDetailsService;
+    // @Autowired
+    // private UsuarioService jwtUserDetailsService;
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
