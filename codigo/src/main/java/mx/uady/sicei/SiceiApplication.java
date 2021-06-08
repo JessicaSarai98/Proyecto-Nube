@@ -10,6 +10,7 @@ public class SiceiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SiceiApplication.class, args);
+		//SpringApplication.run(SpringBootHelloWorldApplication.class, arg);
 	}
 
 }

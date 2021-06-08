@@ -71,7 +71,7 @@ public class AuthRest {
         return ResponseEntity.ok(usuario); 
     }
 
-    @RequestMapping({ "/hello" })
+    @RequestMapping("/hello")
 	public String firstPage() {
 		return "Hello World";
 	}

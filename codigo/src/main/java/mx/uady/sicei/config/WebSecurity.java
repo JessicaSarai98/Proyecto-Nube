@@ -53,10 +53,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .httpBasic().disable() // Authorization: Basic base64(usuario:contrasena) x.x
             .authorizeRequests()
-                .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/login", "/register", "/authenticate").permitAll()
                 .anyRequest().authenticated()
             .and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
                 .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
+        //http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     //    System.out.println(tokenFilter);
     }
 
