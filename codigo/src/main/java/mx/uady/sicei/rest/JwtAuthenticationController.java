@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import jdk.internal.org.jline.utils.Log;
 import mx.uady.sicei.service.*;
 
 
@@ -45,13 +47,15 @@ public class JwtAuthenticationController {
 				.loadUserByUsername(authenticationRequest.getUsername());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
-
+		// usuario.setToken(token);
+		// usuario = usuarioRepository.save(usuario); 
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
 	private void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			// System.out.println("termina authenticate");
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {

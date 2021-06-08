@@ -7,16 +7,43 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import mx.uady.sicei.model.Usuario;
+import mx.uady.sicei.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Service
 public class JwtUsuarioService implements UserDetailsService{
+	
+	@Autowired
+    private UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		if ("javainuse".equals(username)) {
-			return new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
+
+		Usuario usuario = usuarioRepository.findByUsuario(username);
+
+		if (usuario!=null) {
+			return new User(usuario.getUsuario(), usuario.getPassword(),
 					new ArrayList<>());
 		} else {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
 	}
 }
+
+
+
+
+// public String login(UsuarioRequest request) {
+// 	Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario());
+// 	if (usuario==null){
+// 		throw new NotFoundException();
+// 	}
+// 	if(!passwordEncoder.matches(request.getPassword(), usuario.getPassword())){
+// 		throw new BadRequestException();
+// 	}
+// 	String token = UUID.randomUUID().toString();
+// 	usuario.setToken(token);
+// 	usuario = usuarioRepository.save(usuario); 
+// 	return token;
+// }
