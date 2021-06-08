@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import mx.uady.sicei.model.DAOUser;
 
 import jdk.internal.org.jline.utils.Log;
 import mx.uady.sicei.service.*;
+import mx.uady.sicei.model.UserDTO;
 
 
 import mx.uady.sicei.config.JwtTokenUtil;
@@ -50,6 +52,12 @@ public class JwtAuthenticationController {
 		// usuario.setToken(token);
 		// usuario = usuarioRepository.save(usuario); 
 		return ResponseEntity.ok(new JwtResponse(token));
+	}
+
+	@RequestMapping(value="/register", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+			return ResponseEntity.ok(userDetailsService.save(user));
+	
 	}
 
 	private void authenticate(String username, String password) throws Exception {
