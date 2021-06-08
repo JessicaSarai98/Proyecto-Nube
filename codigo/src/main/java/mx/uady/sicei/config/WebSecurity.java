@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import mx.uady.sicei.service.UsuarioService;
@@ -58,10 +59,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
             .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-                .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
-        //http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            //.and()
+              //  .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
+        http
+            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     //    System.out.println(tokenFilter);
     }
 
