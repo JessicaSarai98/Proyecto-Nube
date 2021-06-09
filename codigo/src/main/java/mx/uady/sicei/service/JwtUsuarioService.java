@@ -11,6 +11,7 @@ import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import mx.uady.sicei.dao.UserDao;
 import mx.uady.sicei.model.DAOUser;
 import mx.uady.sicei.model.UserDTO;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,11 +23,11 @@ public class JwtUsuarioService implements UserDetailsService{
 	@Autowired
     private UsuarioRepository usuarioRepository;
 
-	@Autowired 
-	private DAOUser DaoUser; 
+	@Autowired
+	private UserDao userDao;
 
 	@Autowired
-	private PassswordEncoder bcryptEncoder;
+	private PasswordEncoder bcryptEncoder;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,11 +41,12 @@ public class JwtUsuarioService implements UserDetailsService{
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
 	}
-	public UserDao save(UserDTO user){
+	
+	public DAOUser save(UserDTO user){
 		DAOUser newUser = new DAOUser();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		return DAOUser.save(newUser);
+		return userDao.save(newUser);
 	}
 }
 
