@@ -10,12 +10,7 @@ import org.springframework.stereotype.Service;
 import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import mx.uady.sicei.dao.UserDao;
-import mx.uady.sicei.model.DAOUser;
-import mx.uady.sicei.model.UserDTO;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import mx.uady.sicei.config.JwtTokenUtil;
 
 @Service
 public class JwtUsuarioService implements UserDetailsService{
@@ -24,11 +19,8 @@ public class JwtUsuarioService implements UserDetailsService{
     private UsuarioRepository usuarioRepository;
 
 	@Autowired
-	private UserDao userDao;
+	private JwtTokenUtil jwtTokenUtil;
 
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
-	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -41,28 +33,28 @@ public class JwtUsuarioService implements UserDetailsService{
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
 	}
-	
-	public DAOUser save(UserDTO user){
-		DAOUser newUser = new DAOUser();
-		newUser.setUsername(user.getUsername());
-		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		return userDao.save(newUser);
+
+	public String authToken(String username)  {
+		Usuario usuario = usuarioRepository.findByUsuario(username);
+
+		if (usuario!=null) {
+
+			UserDetails userDetails = new User(usuario.getUsuario(), usuario.getPassword(),	new ArrayList<>());
+			String token = jwtTokenUtil.generateToken(userDetails);
+
+			usuario.setToken(token);
+			usuario = usuarioRepository.save(usuario); 
+			
+			return token;
+		} else {
+			throw new UsernameNotFoundException("User not found with username: " + username);
+		}
 	}
+
+
+	
+
 }
 
 
-
-
-// public String login(UsuarioRequest request) {
-// 	Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario());
-// 	if (usuario==null){
-// 		throw new NotFoundException();
-// 	}
-// 	if(!passwordEncoder.matches(request.getPassword(), usuario.getPassword())){
-// 		throw new BadRequestException();
-// 	}
-// 	String token = UUID.randomUUID().toString();
-// 	usuario.setToken(token);
-// 	usuario = usuarioRepository.save(usuario); 
-// 	return token;
-// }
+ 

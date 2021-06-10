@@ -10,7 +10,13 @@ import jdk.nashorn.internal.runtime.regexp.joni.ast.AnyCharNode;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import mx.uady.sicei.config.JwtTokenUtil;
+// import mx.uady.sicei.config.JwtTokenUtil;
 import mx.uady.sicei.exception.*;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Usuario;
@@ -44,6 +50,10 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+
     @Transactional // Crear una transaccion
     public Alumno registrarAlumno(AuthRequest request) {
         
@@ -55,7 +65,11 @@ public class AuthService {
         Usuario usuarioCrear = new Usuario();
         usuarioCrear.setUsuario(request.getUsuario());
         usuarioCrear.setPassword(passwordEncoder.encode(request.getPassword()));
-        String token = UUID.randomUUID().toString();
+        // String token = UUID.randomUUID().toString();
+
+        UserDetails userDetails = new User(usuarioCrear.getUsuario(), usuarioCrear.getPassword(),	new ArrayList<>());
+        String token = jwtTokenUtil.generateToken(userDetails);
+
         usuarioCrear.setToken(token);
         Usuario usuarioGuardado = usuarioRepository.save(usuarioCrear); 
         Alumno alumno = new Alumno();
@@ -96,16 +110,21 @@ public class AuthService {
 
 
     @Transactional // Crear una transaccion
-    public void logout(Integer id) {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(()-> new NotFoundException());
-        usuario.setToken(null);
-        usuarioRepository.save(usuario); 
-    }
+    public void logout(String usuario) {
+        Usuario user = usuarioRepository.findByUsuario(usuario);
+        // .orElseThrow(()-> new NotFoundException());
+        if (user!=null){
+            user.setToken(null);
+            usuarioRepository.save(user); 
+        }
+            // new NotFoundException();
 
-    @Transactional
-    public void logout2(Usuario user) {
-        user.setToken(null);
-        usuarioRepository.save(user); 
+        
+    }
+ 
+    @Transactional // Crear una transaccion
+    public Usuario self(String usuario) {
+        return usuarioRepository.findByUsuario(usuario);
     }
      
 }

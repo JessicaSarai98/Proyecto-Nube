@@ -23,6 +23,7 @@ import mx.uady.sicei.model.request.UsuarioRequest;
 import mx.uady.sicei.model.request.AuthRequest;
 import mx.uady.sicei.service.AlumnoService;
 import mx.uady.sicei.service.AuthService;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @RestController // Metaprogramacion
 // @RequestMapping("/api")
@@ -43,17 +44,17 @@ public class AuthRest {
 
     @PostMapping("/logout2")
     public ResponseEntity<Void> postLogout( ) throws URISyntaxException {
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        authService.logout2(usuario);
+        UserDetails usuario =  (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        authService.logout(usuario.getUsername());
        return ResponseEntity.noContent().build();
     }
     
 
-    @PostMapping("/logout/{id}")
-    public ResponseEntity<Void> postLogout(@PathVariable Integer id ) throws URISyntaxException {
-        authService.logout(id);
-       return ResponseEntity.noContent().build();
-    }
+    // @PostMapping("/logout/{id}")
+    // public ResponseEntity<Void> postLogout(@PathVariable Integer id ) throws URISyntaxException {
+    //     authService.logout(id);
+    //    return ResponseEntity.noContent().build();
+    // }
 
 
     @PostMapping("/login")
@@ -67,8 +68,9 @@ public class AuthRest {
 
     @GetMapping("/self")
     public ResponseEntity<Usuario> getLoggedUser(){
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return ResponseEntity.ok(usuario); 
+        // Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails usuario =  (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok(authService.self(usuario.getUsername())); 
     }
 
     @RequestMapping("/hello")

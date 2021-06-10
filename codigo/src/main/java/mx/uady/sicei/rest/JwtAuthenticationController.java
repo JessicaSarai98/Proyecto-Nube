@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import mx.uady.sicei.model.DAOUser;
 
 import jdk.internal.org.jline.utils.Log;
 import mx.uady.sicei.service.*;
-import mx.uady.sicei.model.UserDTO;
 
 
 import mx.uady.sicei.config.JwtTokenUtil;
@@ -45,19 +43,13 @@ public class JwtAuthenticationController {
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-		final UserDetails userDetails = userDetailsService
-				.loadUserByUsername(authenticationRequest.getUsername());
-
-		final String token = jwtTokenUtil.generateToken(userDetails);
+		// final UserDetails userDetails = userDetailsService
+		// 		.loadUserByUsername(authenticationRequest.getUsername());
+		final String token = userDetailsService.authToken(authenticationRequest.getUsername());
+		// final String token = jwtTokenUtil.generateToken(userDetails);
 		// usuario.setToken(token);
 		// usuario = usuarioRepository.save(usuario); 
 		return ResponseEntity.ok(new JwtResponse(token));
-	}
-
-	@RequestMapping(value="/register", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-			return ResponseEntity.ok(userDetailsService.save(user));
-	
 	}
 
 	private void authenticate(String username, String password) throws Exception {
