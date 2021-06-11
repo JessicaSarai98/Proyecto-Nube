@@ -28,6 +28,9 @@ public class Usuario{
     @JsonIgnore
     private String token;
 
+    @Column(name="email")
+    private String email; 
+
     public Usuario() {
     }
 
@@ -50,6 +53,14 @@ public class Usuario{
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public void setEmail(String email){
+        this.email=email;
     }
 
     public Usuario id(Integer id) {

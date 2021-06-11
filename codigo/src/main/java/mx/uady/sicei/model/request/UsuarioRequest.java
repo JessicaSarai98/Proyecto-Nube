@@ -22,6 +22,11 @@ public class UsuarioRequest {
     @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}",message="La contraseña debe mayor de 8 caracteres y contener letras, numeros y al menos 1 caracter especial.")      
     private String password;
 
+    @NotNull
+    @Size(min=5, max=50)
+    @NotEmpty
+    private String email;
+
     public UsuarioRequest() {
 
     }
@@ -40,6 +45,14 @@ public class UsuarioRequest {
 
     public String getUsuario() {
         return usuario;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email=email;
     }
 
     // public String getNombre() {
