@@ -65,6 +65,8 @@ public class AuthService {
         Usuario usuarioCrear = new Usuario();
         usuarioCrear.setUsuario(request.getUsuario());
         usuarioCrear.setPassword(passwordEncoder.encode(request.getPassword()));
+        
+        usuarioCrear.setEmail(request.getEmail());
         // String token = UUID.randomUUID().toString();
 
         UserDetails userDetails = new User(usuarioCrear.getUsuario(), usuarioCrear.getPassword(),	new ArrayList<>());

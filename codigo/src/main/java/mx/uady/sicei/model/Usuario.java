@@ -73,6 +73,11 @@ public class Usuario{
         return this;
     }
 
+    public Usuario email(String email){
+        this.email=email;
+        return this;
+    }
+
     /**
      * @param password the password to set
      */

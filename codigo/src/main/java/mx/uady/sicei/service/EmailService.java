@@ -15,7 +15,7 @@ public class EmailService {
     
     private final String SUBJECT = "Bienvenido al SICEI";
 
-    private final String id_email= "aaaaa";
+    private final String id_email= "silenthill98";
 
     public EmailService(){
         emailSender = new EmailSender(); 

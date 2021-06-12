@@ -51,6 +51,7 @@ public class AlumnoService {
 
         usuarioCrear.setUsuario(request.getUsuario());
         usuarioCrear.setPassword(this.password);
+        
     
         String token = UUID.randomUUID().toString();
         usuarioCrear.setToken(token);

@@ -34,6 +34,8 @@ public class UsuarioService {
         usuario.setId(id);
         usuario.setUsuario(request.getUsuario());
         usuario.setPassword(request.getPassword());
+        
+        usuario.setEmail(request.getEmail());
 
         String token = UUID.randomUUID().toString();
         usuario.setToken(token);
