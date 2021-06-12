@@ -9,12 +9,14 @@ import jdk.nashorn.internal.runtime.regexp.joni.ast.AnyCharNode;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import mx.uady.sicei.config.EmailSender;
 import mx.uady.sicei.config.JwtTokenUtil;
 // import mx.uady.sicei.config.JwtTokenUtil;
 import mx.uady.sicei.exception.*;
@@ -30,6 +32,9 @@ import mx.uady.sicei.repository.AlumnoRepository;
 import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.repository.EquipoRepository;
 import mx.uady.sicei.repository.TutoriaRepository;
+
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 
 @Service
 public class AuthService {
@@ -53,6 +58,14 @@ public class AuthService {
     
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+
+    private EmailSender emailSender;
+    @Autowired
+    public AuthService(EmailSender emailSender){
+        this.emailSender=emailSender;
+    }
+
+
 
     @Transactional // Crear una transaccion
     public Alumno registrarAlumno(AuthRequest request) {
@@ -127,6 +140,18 @@ public class AuthService {
     @Transactional // Crear una transaccion
     public Usuario self(String usuario) {
         return usuarioRepository.findByUsuario(usuario);
+    }
+
+    @Async
+    public void enviarCorreo(Usuario usuario){
+        for(int i=1;i<21;i++){
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setFrom("Correo electronico del emisor");
+            mailMessage.setTo(usuario.getEmail());
+            mailMessage.setSubject("Registro completado");
+            mailMessage.setText("Su registro fue completado con exito");
+            emailSender.send(mailMessage);
+        }
     }
      
 }
