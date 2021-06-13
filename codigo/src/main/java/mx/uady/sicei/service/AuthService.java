@@ -115,7 +115,7 @@ public class AuthService {
         alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
         alumno = alumnoRepository.save(alumno);
         
-        emailService.enviarCorreoRegistro(usuarioCrear);
+        //emailService.enviarCorreoRegistro(usuarioCrear);
         return alumno;
     }
  
@@ -160,7 +160,7 @@ public class AuthService {
             for(int i=1;i<3;i++){
             System.out.println("enviando correo "+i);
             SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom("jessicasarai1698@gmail.com");
+            mailMessage.setFrom("j1095298144-4a12ab@inbox.mailtrap.io");
             mailMessage.setTo(usuario.getEmail());
             mailMessage.setSubject("Registro completado");
             mailMessage.setText("Su registro fue completado con exito");
@@ -173,17 +173,6 @@ public class AuthService {
     
     }
 
-    public String sendEmail() {
-		SimpleMailMessage message = new SimpleMailMessage();
-		
-		message.setFrom("");
-		message.setTo("");
-		message.setSubject("Test Subject");
-		message.setText("Test Body");
-		
-		javaMailSender.send(message);
-		
-		return "Mail sent successfully";
-	}
+    
      
 }

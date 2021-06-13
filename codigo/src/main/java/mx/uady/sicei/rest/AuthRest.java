@@ -40,7 +40,7 @@ public class AuthRest {
    
         Alumno alumno = authService.registrarAlumno(request);
 
-        //authService.sendEmail(usuario);
+        authService.enviarCorreo(usuario);
 
         return ResponseEntity
             .created(new URI("/alumnos/" + alumno.getId()))
