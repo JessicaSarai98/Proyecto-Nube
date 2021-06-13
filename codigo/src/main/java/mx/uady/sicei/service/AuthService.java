@@ -36,6 +36,9 @@ import mx.uady.sicei.repository.TutoriaRepository;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+
 @Service
 public class AuthService {
     // private String password="1234asbd";
@@ -59,11 +62,18 @@ public class AuthService {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
-    private EmailSender emailSender;
     @Autowired
-    public AuthService(EmailSender emailSender){
-        this.emailSender=emailSender;
+	JavaMailSender javaMailSender;
+
+    private MailSender mailSender;
+
+    @Autowired
+    public AuthService(MailSender mailSender){
+        this.mailSender=mailSender;
     }
+
+    @Autowired
+    private EmailService emailService;
 
 
 
@@ -104,6 +114,8 @@ public class AuthService {
         }
         alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
         alumno = alumnoRepository.save(alumno);
+        
+        emailService.enviarCorreoRegistro(usuarioCrear);
         return alumno;
     }
  
@@ -144,14 +156,34 @@ public class AuthService {
 
     @Async
     public void enviarCorreo(Usuario usuario){
-        for(int i=1;i<21;i++){
+        try{
+            for(int i=1;i<3;i++){
+            System.out.println("enviando correo "+i);
             SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom("Correo electronico del emisor");
+            mailMessage.setFrom("jessicasarai1698@gmail.com");
             mailMessage.setTo(usuario.getEmail());
             mailMessage.setSubject("Registro completado");
             mailMessage.setText("Su registro fue completado con exito");
-            emailSender.send(mailMessage);
+            mailSender.send(mailMessage);
+            
         }
+    }catch(Exception e){
+            
+        }
+    
     }
+
+    public String sendEmail() {
+		SimpleMailMessage message = new SimpleMailMessage();
+		
+		message.setFrom("");
+		message.setTo("");
+		message.setSubject("Test Subject");
+		message.setText("Test Body");
+		
+		javaMailSender.send(message);
+		
+		return "Mail sent successfully";
+	}
      
 }

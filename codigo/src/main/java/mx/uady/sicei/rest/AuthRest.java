@@ -32,11 +32,16 @@ public class AuthRest {
     @Autowired
     private AuthService authService;
 
+    
+    private Usuario usuario; 
+
     @PostMapping("/register")
     public ResponseEntity<Alumno> postRegister(@RequestBody @Valid AuthRequest request) throws URISyntaxException {
    
         Alumno alumno = authService.registrarAlumno(request);
- 
+
+        //authService.sendEmail(usuario);
+
         return ResponseEntity
             .created(new URI("/alumnos/" + alumno.getId()))
             .body(alumno);
