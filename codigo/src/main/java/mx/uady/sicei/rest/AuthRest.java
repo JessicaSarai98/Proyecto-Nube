@@ -25,6 +25,14 @@ import mx.uady.sicei.service.AlumnoService;
 import mx.uady.sicei.service.AuthService;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
+
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpHeaders;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
 @RestController // Metaprogramacion
 // @RequestMapping("/api")
 public class AuthRest {
@@ -63,8 +71,8 @@ public class AuthRest {
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> postLogin(@RequestBody  @Valid UsuarioRequest request) throws URISyntaxException {
-        String token = authService.login(request);
+    public ResponseEntity<String> postLogin(HttpServletRequest request2, @RequestBody  @Valid UsuarioRequest request) throws URISyntaxException {
+        String token = authService.login(request,request2.getHeader("User-Agent"));
         return ResponseEntity.ok(token); 
 
     }
