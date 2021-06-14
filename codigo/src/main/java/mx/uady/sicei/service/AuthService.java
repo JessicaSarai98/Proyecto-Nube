@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import mx.uady.sicei.config.EmailSender;
 import mx.uady.sicei.config.JwtTokenUtil;
 // import mx.uady.sicei.config.JwtTokenUtil;
 import mx.uady.sicei.exception.*;
@@ -71,11 +70,6 @@ public class AuthService {
     public AuthService(MailSender mailSender){
         this.mailSender=mailSender;
     }
-
-    @Autowired
-    private EmailService emailService;
-
-
 
     @Transactional // Crear una transaccion
     public Alumno registrarAlumno(AuthRequest request) {
