@@ -27,10 +27,12 @@ import mx.uady.sicei.repository.AlumnoRepository;
 import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.repository.EquipoRepository;
 import mx.uady.sicei.repository.TutoriaRepository;
+import mx.uady.sicei.service.AuthService;
 
 @Service
 public class AlumnoService {
     private String password="1234asbd";
+    private String actualizaciones, alumnoData = "";
 
     @Autowired
     private AlumnoRepository alumnoRepository;
@@ -44,6 +46,9 @@ public class AlumnoService {
     @Autowired
     private TutoriaRepository tutoriaRepository;
     // POST, PUT, GET, GET by ID, DELETE para entidad Alumno
+
+    @Autowired
+    private AuthService authService;
 
     @Transactional // Crear una transaccion
     public Alumno crearAlumno(AlumnoRequest request) {
@@ -81,18 +86,24 @@ public class AlumnoService {
 
     @Transactional // Crear una transaccion
     public Alumno actualizarAlumno(Integer id,AlumnoRequest request) {
-        // System.out.println(id);
-        // System.out.println(request);
+        actualizaciones = alumnoData = "";
+        //System.out.println("ID: "+id);
+        //System.out.println("ALUMNO: "+request);
         Alumno alumno = alumnoRepository.findById(id).orElseThrow(()-> new NotFoundException());
-        // System.out.println(alumno.toString());
+        //System.out.println("ALUMNO: "+alumno);
         if (request.getNombre()!=null && request.getNombre().trim()!="" ){
+            alumnoData+=" Nombre del usuario: " +alumno.getNombre();
+            actualizaciones+= " Nombre del usuario: "+request.getNombre();
             alumno.setNombre(request.getNombre());
         }
         if (request.getEquipo()==null ){
             alumno.setEquipo(null);
         }else
         {
+            //System.out.println("EQUIPO", type alumno);
             Equipo equipo = equipoRepository.findById(request.getEquipo()).orElseThrow(()-> new BadRequestException("El valor del equipo no existe"));
+            alumnoData+="\n Tenia al equipo: "+alumno.getEquipo().getModelo();
+            actualizaciones+="\n Tiene el equipo: "+equipo.getModelo().toString();
             alumno.setEquipo(equipo);
         }
         if (request.getLicenciatura()==null ){
@@ -100,13 +111,16 @@ public class AlumnoService {
         }else{
             try {          
                 Licenciatura lic= Licenciatura.valueOf(request.getLicenciatura());
+                alumnoData+="\n Licenciatura: "+alumno.getLicenciatura();
+                actualizaciones+= "\n Licenciatura: "+request.getLicenciatura();
                 alumno.setLicenciatura(lic);
              } catch (IllegalArgumentException e) {                   
                 throw new BadRequestException("Invalid value for Licenciatura " + ": " + request.getLicenciatura());
              }
         }
-        // System.out.println(alumno);
         alumno = alumnoRepository.save(alumno); 
+        authService.enviarCorreo("Sus datos se han actualizado correctamente :) \n\n Los datos que tenía antes del cambio son: \n" + alumnoData+ 
+         "\n\n\n Los datos nuevos son:\n"+actualizaciones,alumno.getUsuario().getEmail(),"Datos actualizados");
         return alumno;
     }
     @Transactional(readOnly = true)

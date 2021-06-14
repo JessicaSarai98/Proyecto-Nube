@@ -115,7 +115,7 @@ public class AuthService {
         alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
         alumno = alumnoRepository.save(alumno);
         
-        enviarCorreo(request.getEmail());
+        enviarCorreo("Su registro fue completado con exito",request.getEmail(),"Registro completado");
         //emailService.enviarCorreoRegistro(usuarioCrear);
         return alumno;
     }
@@ -156,20 +156,19 @@ public class AuthService {
     }
 
     @Async
-    public void enviarCorreo(String email){
+    public void enviarCorreo(String texto, String email, String subject){
         try{
-            System.out.println("enviando correo ");
             SimpleMailMessage mailMessage = new SimpleMailMessage();
+            System.out.println("Correo enviando....");
             mailMessage.setFrom("ejemplo-karina@gmail.com");
-            //System.out.println("el correo del usuario es: - "+email);
             mailMessage.setTo(email);
-            mailMessage.setSubject("Registro completado");
-            mailMessage.setText("Su registro fue completado con exito");
+            mailMessage.setSubject(subject);
+            mailMessage.setText(texto);
             mailSender.send(mailMessage);
-    }catch(Exception e){            
-        System.out.println("Error al enviar el email de registro desde enviar correo  \n"+ e);
-    }
-    
+            System.out.println("Correo enviado exitosamente");
+        }catch(Exception e){            
+            System.out.println("Error al enviar el email de registro desde enviar correo  \n"+ e.getMessage());
+        }    
     }
 
     
