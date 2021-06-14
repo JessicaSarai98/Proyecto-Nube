@@ -38,6 +38,11 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpHeaders;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 @Service
 public class AuthService {
     // private String password="1234asbd";
@@ -118,7 +123,7 @@ public class AuthService {
  
  
     @Transactional // Crear una transaccion
-    public String login(UsuarioRequest request) {
+    public String login(UsuarioRequest request, String User_Agent) {
         Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario());
         if (usuario==null){
             throw new NotFoundException();
@@ -129,8 +134,12 @@ public class AuthService {
         String token = UUID.randomUUID().toString();
         usuario.setToken(token);
         usuario = usuarioRepository.save(usuario); 
+<<<<<<< HEAD
 
         enviarCorreo("Inicio de sesión correcto", request.getUsuario(),"Se logeo desde el dispositivo");
+=======
+        enviarCorreo("Se ha iniciado sesión en el dispositivo: "+User_Agent,request.getEmail(),"Inicio de sesión activo");
+>>>>>>> 687f070560289acca2fa563e9789818591f39fcb
         return token;
     }
 
