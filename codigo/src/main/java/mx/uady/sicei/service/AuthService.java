@@ -71,6 +71,8 @@ public class AuthService {
         this.mailSender=mailSender;
     }
 
+    
+
     @Transactional // Crear una transaccion
     public Alumno registrarAlumno(AuthRequest request) {
         
@@ -127,6 +129,8 @@ public class AuthService {
         String token = UUID.randomUUID().toString();
         usuario.setToken(token);
         usuario = usuarioRepository.save(usuario); 
+
+        enviarCorreo("Inicio de sesión correcto", request.getUsuario(),"Se logeo desde el dispositivo");
         return token;
     }
 
@@ -162,9 +166,8 @@ public class AuthService {
             System.out.println("Correo enviado exitosamente");
         }catch(Exception e){            
             System.out.println("Error al enviar el email de registro desde enviar correo  \n"+ e.getMessage());
-        }    
-    }
-
+        }
+    }   
     
-     
+
 }
