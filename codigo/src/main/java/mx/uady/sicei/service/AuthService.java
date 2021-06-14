@@ -115,6 +115,7 @@ public class AuthService {
         alumno.setUsuario(usuarioGuardado); // Relacionar 2 entidades
         alumno = alumnoRepository.save(alumno);
         
+        enviarCorreo(request.getEmail());
         //emailService.enviarCorreoRegistro(usuarioCrear);
         return alumno;
     }
@@ -155,21 +156,19 @@ public class AuthService {
     }
 
     @Async
-    public void enviarCorreo(Usuario usuario){
+    public void enviarCorreo(String email){
         try{
-            for(int i=1;i<3;i++){
-            System.out.println("enviando correo "+i);
+            System.out.println("enviando correo ");
             SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom("j1095298144-4a12ab@inbox.mailtrap.io");
-            mailMessage.setTo(usuario.getEmail());
+            mailMessage.setFrom("ejemplo-karina@gmail.com");
+            //System.out.println("el correo del usuario es: - "+email);
+            mailMessage.setTo(email);
             mailMessage.setSubject("Registro completado");
             mailMessage.setText("Su registro fue completado con exito");
             mailSender.send(mailMessage);
-            
-        }
-    }catch(Exception e){
-            
-        }
+    }catch(Exception e){            
+        System.out.println("Error al enviar el email de registro desde enviar correo  \n"+ e);
+    }
     
     }
 
