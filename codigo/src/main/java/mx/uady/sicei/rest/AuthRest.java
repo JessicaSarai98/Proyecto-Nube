@@ -28,10 +28,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpHeaders;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 
 @RestController // Metaprogramacion
 // @RequestMapping("/api")

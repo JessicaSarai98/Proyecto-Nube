@@ -37,12 +37,6 @@ import org.springframework.mail.SimpleMailMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpHeaders;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 @Service
 public class AuthService {
     // private String password="1234asbd";
