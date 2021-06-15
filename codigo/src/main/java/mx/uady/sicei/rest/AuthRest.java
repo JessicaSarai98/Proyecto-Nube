@@ -2,7 +2,7 @@ package mx.uady.sicei.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.http.HttpHeaders;
+//import java.net.http.HttpHeaders;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -68,8 +68,8 @@ public class AuthRest {
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> postLogin(HttpServletRequest request2, @RequestBody  @Valid UsuarioRequest request) throws URISyntaxException {
-        String token = authService.login(request,request2.getHeader("User-Agent"));
+    public ResponseEntity<String> postLogin(HttpServletRequest HttpRequest, @RequestBody  @Valid UsuarioRequest request) throws URISyntaxException {
+        String token = authService.login(request,HttpRequest.getHeader("User-Agent"));
         return ResponseEntity.ok(token); 
 
     }

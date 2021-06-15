@@ -29,11 +29,9 @@ public class TutoriaService{
     private AlumnoRepository alumnoRepository;
     @Autowired 
     private ProfesorRepository profesorRepository;
-
+    
     @Autowired
-	JavaMailSender javaMailSender;
-
-    private MailSender mailSender;
+    private AuthService authService;
 
     public List<Tutoria> getTutorias(){
         List<Tutoria> tutorias = new LinkedList<>();
@@ -102,36 +100,20 @@ public class TutoriaService{
     public void borrarTutoria(Integer idalumno, Integer idprofesor){
         TutoriaLlave tutoriaLlave = new TutoriaLlave(); 
 
+        Tutoria tutoria = new Tutoria(); 
         
         Alumno alumno= alumnoRepository.findById(idalumno)
             .orElseThrow(() -> new NotFoundException("El alumno no se encuentra."));
 
-        profesorRepository.findById(idprofesor)
+        Profesor profe = profesorRepository.findById(idprofesor)
             .orElseThrow(() -> new NotFoundException("El profesor no se encuentra."));
 
         tutoriaLlave.setIdAlumno(idalumno);
         tutoriaLlave.setIdProfesor(idprofesor);
-
         tutoriaRepository.deleteById(tutoriaLlave);
-        System.out.println(" "+tutoriaLlave.getIdProfesor()+" "+tutoriaLlave);
-        //enviarCorreo("La tutoria con el profesor: "+tutoriaLlave.getIdProfesor()+"", alumno.getUsuario().getEmail(), "");
+        authService.enviarCorreo("Querid@ "+alumno.getNombre()+", la tutoría asignada con el profesor "+
+        profe.getNombre()+" con una duración de " + tutoria.getHoras() +" ha sido eliminada. :(", 
+        alumno.getUsuario().getEmail(),
+         "Tutoría eliminada");
     }
-
-    @Async
-    public void enviarCorreo(String texto, String email, String subject){
-        try{
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            System.out.println("Correo enviando....");
-            mailMessage.setFrom("ejemplo-karina@gmail.com");
-            mailMessage.setTo(email);
-            mailMessage.setSubject(subject);
-            mailMessage.setText(texto);
-            mailSender.send(mailMessage);
-            System.out.println("Correo enviado exitosamente");
-        }catch(Exception e){            
-            System.out.println("Error al enviar el email de registro desde enviar correo  \n"+ e.getMessage());
-        }
-    }
-
-
 }
