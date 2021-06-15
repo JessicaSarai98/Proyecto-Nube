@@ -134,12 +134,7 @@ public class AuthService {
         String token = UUID.randomUUID().toString();
         usuario.setToken(token);
         usuario = usuarioRepository.save(usuario); 
-<<<<<<< HEAD
-
-        enviarCorreo("Inicio de sesión correcto", request.getUsuario(),"Se logeo desde el dispositivo");
-=======
         enviarCorreo("Se ha iniciado sesión en el dispositivo: "+User_Agent,request.getEmail(),"Inicio de sesión activo");
->>>>>>> 687f070560289acca2fa563e9789818591f39fcb
         return token;
     }
 
