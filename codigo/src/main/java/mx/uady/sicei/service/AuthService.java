@@ -70,6 +70,8 @@ public class AuthService {
         this.mailSender=mailSender;
     }
 
+    
+
     @Transactional // Crear una transaccion
     public Alumno registrarAlumno(AuthRequest request) {
         
@@ -162,20 +164,8 @@ public class AuthService {
             System.out.println("Correo enviado exitosamente");
         }catch(Exception e){            
             System.out.println("Error al enviar el email de registro desde enviar correo  \n"+ e.getMessage());
-        }    
-    }
+        }
+    }   
+    
 
-    public String sendEmail() {
-		SimpleMailMessage message = new SimpleMailMessage();
-		
-		message.setFrom("");
-		message.setTo("");
-		message.setSubject("Test Subject");
-		message.setText("Test Body");
-		
-		javaMailSender.send(message);
-		
-		return "Mail sent successfully";
-	}
-     
 }
