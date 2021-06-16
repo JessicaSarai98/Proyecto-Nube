@@ -98,24 +98,15 @@ public class TutoriaService{
     }
 
     public void borrarTutoria(Integer idalumno, Integer idprofesor){
-        // TutoriaLlave tutoriaLlave = new TutoriaLlave(); 
-
+        
         Tutoria tutoria = new Tutoria(); 
         
-        // Alumno alumno= alumnoRepository.findById(idalumno)
-        //     .orElseThrow(() -> new NotFoundException("El alumno no se encuentra."));
-
-        // Profesor profe = profesorRepository.findById(idprofesor)
-        //     .orElseThrow(() -> new NotFoundException("El profesor no se encuentra."));
-
-        // tutoriaLlave.setIdAlumno(idalumno);
-        // tutoriaLlave.setIdProfesor(idprofesor);
         tutoria=this.getTutoria(idalumno, idprofesor);
         tutoriaRepository.deleteById(tutoria.getId());
         
-        System.out.println("Querid@ "+tutoria.getAlumno().getNombre()+", la tutoría asignada con el profesor "+
-        tutoria.getProfesor().getNombre()+" con una duración de " + tutoria.getHoras().toString() +" ha sido eliminada. :("+
-        tutoria.getAlumno().getUsuario().getEmail()+
+        authService.enviarCorreo("Querid@ "+tutoria.getAlumno().getNombre()+", la tutoría asignada con el profesor "+
+        tutoria.getProfesor().getNombre()+" con una duración de " + tutoria.getHoras().toString() +" ha sido eliminada. :(",
+        tutoria.getAlumno().getUsuario().getEmail(),
          "Tutoría eliminada");
     }
 }
